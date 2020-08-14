@@ -33,7 +33,7 @@ get_ces(ces_codes[1])
 
 ```
 
-Character string calls and index calls can be accessed through the secondary function `get_cescodes` discussed in the *[Supporting functions]*(#Supporting-functions) section below.
+Character string calls and index calls can be accessed through the secondary function `get_cescodes` discussed in the [*Supporting functions*](#Supporting-functions) section below.
 
 ### Supporting functions
 Supporting functions in `CESR` include...
