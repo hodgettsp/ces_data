@@ -22,6 +22,12 @@ library(ces)
 get_ces("ces2019_web")
 ```
 
+```
+TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
+
+LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
+```
+
 Alternatively, an index number can be provided which will access a survey that corresponds to the location in a built-in vector.
 
 ```
@@ -33,7 +39,15 @@ get_ces(ces_codes[1])
 
 ```
 
+```
+TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
+
+LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
+```
+
 Character string calls and index calls can be accessed through the secondary function `get_cescodes` discussed in the [*Supporting functions*](#Supporting-functions) section below.
+
+
 
 ### Supporting functions
 Supporting functions in `CESR` include...
