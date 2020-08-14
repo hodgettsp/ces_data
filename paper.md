@@ -53,10 +53,10 @@ Due to the structure of `get_ces` it is possible to load the same dataset twice.
 
 Each dataset is loaded as the type labelled.
 
-
-
 ### Supporting functions
-Supporting functions in `CESR` include `get_cescodes` and `getdecon`.
+Supporting functions in `CESR` include `get_cescodes` and `get_decon`.
+
+`get_cescodes`
 
 
 ## Vignette
