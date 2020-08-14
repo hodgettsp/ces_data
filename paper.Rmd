@@ -17,7 +17,7 @@ The `CESR` is important because it makes working with Canadian Election Study su
 Our package is functionally complimentary to working in R Studio by minimizing the number of steps required to load in a dataset and removing the need of storing data file. Furthermore, the `CESR` package complements the work being done in the R community by building on the work being done through other packages that pull in survey data such as `dataverse` and `cancensus`.
 
 # Key functions
-The main function in `CESR` is.... This takes the following arguments... An example use case for this is...
+The main function in `CESR` is `get_ces`. This function will return a requested CES survey as a usable data object, a url to the original download destination, and the citation for the survey when provided with an associated survey code.  
 
 
 # Supporting functions
