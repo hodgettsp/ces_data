@@ -47,7 +47,11 @@ LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/D
 Character string calls and index calls can be accessed through the secondary function `get_cescodes` discussed in the [*Supporting functions*](#Supporting-functions) section below.
 
 #### Functionality
-The `get_ces` function works such that it takes one variable, either a character string call or index call, which calls to a url on an associated Github repository. The associated file is downloaded as a compressed .zip file and is stored temporarily in the package directory. The folder is unzipped and assigned as a data object in the global environment. The downloaded file and temporary file directory are then removed from the computer.
+The `get_ces` function works such that it takes one variable, either a character string call or index call, which calls to a url on an associated Github repository. If the provided call matches a member of a built-in vector, the associated file is downloaded as a compressed .zip file and is stored temporarily in the package directory. If the provided call does not have a match in the built-in vector, then the process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the console. Upon downloading the file, the folder is unzipped and assigned as a data object in the global environment. The downloaded file and temporary file directory are then removed from the computer. The citation for the survey dataset and original download location are printed in the console.
+
+Due to the structure of `get_ces` it is possible to load the same dataset twice. This allows the downloaded files to be removed from the computer, while also allowing a dataset to be reloaded incase an unmanipulated version is required.
+
+Each dataset is loaded under the type labelled. 
 
 
 
