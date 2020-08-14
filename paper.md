@@ -36,7 +36,6 @@ devtools::install_github("hodgettsp/ces")
 library(ces)
 
 get_ces(ces_codes[1])
-
 ```
 
 ```
@@ -47,10 +46,13 @@ LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/D
 
 Character string calls and index calls can be accessed through the secondary function `get_cescodes` discussed in the [*Supporting functions*](#Supporting-functions) section below.
 
+#### Functionality
+The `get_ces` function works such that it takes one variable, either a character string call or index call, which calls to a url on an associated Github repository. The associated file is downloaded as a compressed .zip file and is stored temporarily in the package directory. The folder is unzipped and assigned as a data object in the global environment. The downloaded file and temporary file directory are then removed from the computer.
+
 
 
 ### Supporting functions
-Supporting functions in `CESR` include...
+Supporting functions in `CESR` include `get_cescodes` and `getdecon`.
 
 
 ## Vignette
