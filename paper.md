@@ -51,7 +51,7 @@ The `get_ces` function works such that it takes one variable, either a character
 
 Due to the structure of `get_ces` it is possible to load the same dataset twice. This allows the downloaded files to be removed from the computer, while also allowing a dataset to be reloaded incase an unmanipulated version is required.
 
-Each dataset is loaded under the type labelled. 
+Each dataset is loaded as the type labelled.
 
 
 
