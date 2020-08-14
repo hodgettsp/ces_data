@@ -10,23 +10,18 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 # Introduction
-In `package_name`, we provide a means of accessing the Canadian Election Study survey datasets in one place that does not require storing data files nor the reading of a file from a working directory. Instead, the `package name` temporarily downloads a compressed .zip file of a requested CES survey dataset, unzips the file and reads the dataset into R as a data object, and then removes the downloaded and unzipped files from the computer. Additionally, the `package name` provides a subset of the 2019 CES online survey that can can be accessed through its own function call. 
+In `CESR`, we provide a means of accessing the Canadian Election Study survey datasets in one place that does not require storing data files nor the reading of a file from a working directory. Instead, the `CESR` temporarily downloads a compressed .zip file of a requested CES survey dataset, unzips the file and reads the dataset into R as a data object, and then removes the downloaded and unzipped files from the computer. Additionally, the `CESR` provides a subset of the 2019 CES online survey that can can be accessed through its own function call. 
 
-The `package_name` is important because it makes working with Canadian Election Study survey datasets easier. By circumventing the need the find, download, and read in a dataset, `package_name` removes the requirement of setting a working directory thereby making the process of setting up a data file for use in R much easier. This makes working between computers much easier, meaning that R projects can easily be shared between team members without the concern of a file being properly read or code not working due to different working directories. Additionally, by creating a subset of the CES 2019 online survey through a built-in function call, the `package_name` provides educators with an important tool that can be used to aid in the teaching of the statistical exploration of survey data.
+The `CESR` is important because it makes working with Canadian Election Study survey datasets easier. By circumventing the need the find, download, and read in a dataset, `CESR` removes the requirement of setting a working directory thereby making the process of setting up a data file for use in R much easier. This makes working between computers much easier, meaning that R projects can easily be shared between team members without the concern of a file being properly read or code not working due to different working directories. Additionally, by creating a subset of the CES 2019 online survey through a built-in function call, the `CESR` provides educators with an important tool that can be used to aid in the teaching of the statistical exploration of survey data.
 
-Our package complements the R Studio workflow by minimizing the number of steps required to load in a dataset and removing the need of storing data file.
-
-Complements other survey packages. Complements dataverse packages.
-
-The remainder of this paper is structured as follows...
-
+Our package is functionally complimentary to working in R Studio by minimizing the number of steps required to load in a dataset and removing the need of storing data file. Furthermore, the `CESR` package complements the work being done in the R community by building on the work being done through other packages that pull in survey data such as `dataverse` and `cancensus`.
 
 # Key functions
-The main function in `package_name` is.... This takes the following arguments... An example use case for this is...
+The main function in `CESR` is.... This takes the following arguments... An example use case for this is...
 
 
 # Supporting functions
-Supporting functions in `package_name` include...
+Supporting functions in `CESR` include...
 
 
 # Vignette
