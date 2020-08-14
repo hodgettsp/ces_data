@@ -22,7 +22,7 @@ library(ces)
 get_ces("ces2019_web")
 ```
 
-Alternatively, an index number can be used to access a survey.
+Alternatively, an index number can be provided which will access a survey that corresponds to the location in a built-in vector.
 
 ```
 devtools::install_github("hodgettsp/ces")
@@ -33,15 +33,17 @@ get_ces(ces_codes[1])
 
 ```
 
+Character string calls and index calls can be accessed through the secondary function `get_cescodes` discussed in the [Supporting functions](#Supporting-functions) section below.
+
 ### Supporting functions
 Supporting functions in `CESR` include...
 
 
-# Vignette
+## Vignette
 
-## Getting the 2019 phone CES
+### Getting the 2019 phone CES
 
-## Something else?
+### Something else?
 
 
-# Next steps and cautions
+## Next steps and cautions
