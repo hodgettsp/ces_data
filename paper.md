@@ -135,13 +135,19 @@ ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ J
 
 While the `get_decon` provides a subset of the CES 2019 online survey dataset, the `CESR` package lends itself to the subsetting of any of the CES survey datasets.
 
-The following presents a vignette of producing a subset of the CES 2019 phone survey dataset.
+The following presents a vignette of producing a subset of the CES 2019 phone survey dataset. This relies on the `CESR`, `labelled`, and `dplyr` packages.
 
-To begin, install and load the `CESR` package into RStudio. Currently, this is only available through the use of the `devtools` package. During installation RStudio may request to update other packages. It is best to hit enter here with an empty line.
+To begin, install and load the `CESR` package (and all other necessary packages) into RStudio. Currently, this is only available through the use of the `devtools` package. During installation RStudio may request to update other packages. It is best to hit enter here with an empty line.
 ```
+# uncomment any package that needs to be installed
 devtools::install_github("hodgettsp/ces")
+# install.packages("labelled")
+# install.packages("dplyr")
+# install.packages("tidyr")
 
 library(ces)
+library(labelled)
+library(dplyr)
 ```
 
 Upon installation and loading of the `CESR` package, use the `get_ces` function to load in the desired CES survey dataset. In this case that is the CES 2019 phone survey.
@@ -163,5 +169,26 @@ head(ces2019_phone)
 # head(ces2019_phone_factor)
 ```
 
+With the dataset loaded, the `select` function from the `dplyr` package is an efficient way of selecting the required variable columns. In this case, the language, phone type, weight, citizenship, year of birth, identified gender, province, satisfaction with Canadian democracy, and most important election issue are selected. Furthermore, the columns are not all named in an understandable way and so will be renamed using the `rename` function from the `dplyr` package. When using `rename` the order goes from new name/old name. 
+```
+ces2019_phone_subset <- ces2019_phone %>% 
+  select(8, 9, 20, 25:30) %>% 
+  rename(citizenship = q1,
+         yob = q2,
+         gender = q3,
+         province = q4,
+         satisfaction = q6,
+         issue_important = q7)
+```
+
+This will have now created a subset of the CES 2019 phone survey with renamed variables and factor values. As a final note, it is recommended to download the codebook for a requested survey dataset. These are available from the link printed on a survey call as well as on the package Github repository README.
+
 
 ## Next steps and cautions
+The `CESR` package is dependent upon the `haven` package to be able to read in the CES survey datasets. Thus, changes to the `haven` package may affect the functionality of the `CESR` package.
+
+Regarding the CES survey datasets, currently the datasets are downloaded from an associated Github repository. This means that a dataset will be downloaded as it currently exists on the repository. While these datasets are relatively stable, updates are performed on the datasets to fix incorrect values or mislabelled variables. While the package will be maintained to ensure the most up-to-date survey datasets are included, it may be the case that an update is not immediately performed.
+
+One future step to eliminate this possible issue is to link the `get_ces` call directly to the download url of the survey as opposed to the current call to the Github repository.
+
+Lastly, another future step will be to build more subets of the surveys. Including the division of survey sections into their own subsets, so that topics may be more easily analysed.
