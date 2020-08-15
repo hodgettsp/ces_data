@@ -191,4 +191,4 @@ Regarding the CES survey datasets, currently the datasets are downloaded from an
 
 One future step to eliminate this possible issue is to link the `get_ces` call directly to the download url of the survey as opposed to the current call to the Github repository.
 
-Lastly, another future step will be to build more subets of the surveys. Including the division of survey sections into their own subsets, so that topics may be more easily analysed.
+Lastly, another future step will be to build more subsets of the surveys. Including the division of survey sections into their own subsets, so that topics may be more easily analysed.
