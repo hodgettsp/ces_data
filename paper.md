@@ -131,9 +131,37 @@ ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ J
 
 ## Vignette
 
-### Getting the 2019 phone CES
+### Creating a subset of the CES 2019 phone survey dataset
 
-### Something else?
+While the `get_decon` provides a subset of the CES 2019 online survey dataset, the `CESR` package lends itself to the subsetting of any of the CES survey datasets.
+
+The following presents a vignette of producing a subset of the CES 2019 phone survey dataset.
+
+To begin, install and load the `CESR` package into RStudio. Currently, this is only available through the use of the `devtools` package. During installation RStudio may request to update other packages. It is best to hit enter here with an empty line.
+```
+devtools::install_github("hodgettsp/ces")
+
+library(ces)
+```
+
+Upon installation and loading of the `CESR` package, use the `get_ces` function to load in the desired CES survey dataset. In this case that is the CES 2019 phone survey.
+
+```
+get_ces("ces2019_phone")
+
+# alternatively can use
+# get_ces(ces_codes[2])
+```
+Unfortunately the `head` function does not work on the labelled dataset format. To check that the dataset has loaded into RStudio correctly, it is best to convert the values to factors.
+
+```
+ces2019_phone <- labelled::to_factor(ces2019_phone)
+head(ces2019_phone)
+
+# alternatively the factored table can be assigned to its own data object to leave the original untouched.
+# ces2019_phone_factor <- labelled::to_factor(ces2019_phone)
+# head(ces2019_phone_factor)
+```
 
 
 ## Next steps and cautions
