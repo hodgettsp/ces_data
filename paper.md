@@ -115,6 +115,54 @@ Console
 
 The `get_cescodes` function works by constructing two vectors, one vector contains the CES survey codes and the other contiaining the assocaited survey argument calls. The function then creates dataframes of two vectors using the `data.frame` function from the `base` package and adds an index number column using the `seq` function from the `base` package (R Core Team, 2020). The dataframes are then merged into a new dataframe using the `merge` function from the `base` package (R Core Team, 2020) by the index number column. Column names in the new dataframe are then renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020) and the vector objects are removed from the RStudio environment. The function does not create any variable that is available in the global environment.
 
+### get_question(do, q)
+The `get_question` function takes two arguments. The name of a data object and the name of a column in the data object. Both arguments must be given as character strings. The function works such that it checks whether the given name for a data object exists using the `exists` function from the `base` package (R Core Team, 2020). If the object does not exist, the function will print out a warning in the console stating `Warning: Data object does not exist`. If the object does exist, the function will check if the given column name exists in the given data object. This is done using a combination of the `hasName` function from the `utils` package and the `get` function from the `base` package (R Core Team, 2020). The `hasName` function checks if the given column name is in the given data object. Because the arguments are given as character strings the `get` function is used to return the actual data object instead of the provided character string. Otherwise the `hasName` function would only check if the given column name argument occurred in the given data object character string argument and not the actual data object. If the column does not exist in the data object a warning is printed in the console stating `Warning: Variable is not in dataset`. If the given column exists in the given data object, the `get_question` function will print in the console the variable label of the given column using a combination of the `var_label` function from the `labelled` package (Larmarange, 2020) and the `get` function from the `base` package (R Core Team, 2020). The `get` function is used for the same purpose as it was earlier in the function, which is to return the actual object and not the given character string argument.
+
+#### `get_question` example 1
+```
+# install cesR package from GitHub
+devtools::install_github("hodgettsp/cesR")
+
+# load package into library
+library(cesR)
+
+# load 2019 phone dataset
+get_ces("ces2019_phone")
+
+# get question for column q11
+get_question("ces2019_phone", "q11")
+```
+
+```
+Console
+
+Which party will you likely to vote for
+```
+
+The `get_question` function is structured in such a way that it is not limited to use with data objects created by the `get_ces` function. It can also be used to return the column label for the `decon` dataset or any dataset of the labelled type.
+
+#### `get_question` example 2
+```
+# install cesR package from GitHub
+devtools::install_github("hodgettsp/cesR")
+
+# load package into library
+library(cesR)
+
+# load decon dataset
+get_decon()
+head(decon)
+
+# get question for education column
+get_question("decon", "education")
+```
+```
+Console
+
+What is the highest level of education that you have completed?
+```
+
+
 ### get_decon()
 When called, `get_decon()` takes no arugments and creates a subset of the 2019 CES online survey under the name `decon` (demographics and economics) when called. The function first checks the global environment if an object named `decon` exists using the `exists` function from `base` package (R Core Team, 2020). This prevents the `decon` dataset from being recreated. If a situation arises in which the `decon` dataset would need to be recreated, then the best course of action is to use the `rm` function from the `base` package (R Core Team, 2020) to remove the `decon` object and then run the `get_decon()` function again. If the `get_decon` function is run when an object with the name `decon` already exists a warning will print in the console stating `Error in get_decon() : Warning: File already exists.`
 
@@ -130,7 +178,7 @@ library(cesR)
 get_decon()
 head(decon)
 
-# relaoad decon
+# reload decon
 get_decon()
 ```
 ```
