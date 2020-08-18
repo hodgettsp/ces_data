@@ -25,7 +25,7 @@ The main function in `cesR` is `get_ces()`. When called, this function returns a
 
 The `get_ces()` function takes one argument in the form of a character string. This argument is a name of a vector item that has been associated with a CES survey that when used calls the download url for that survey on an associated GitHub repository. If the provided character string argument matches a member of a built-in vector, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip file and is stored temporarily in the `inst/extdata` folder in the package directory. If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console. Upon downloading the file, the compressed folder is unzipped using the `unzip` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the filetype of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Lastly, the citation for the requested survey dataset and url for the survey data storage location are printed in the console.
 
-### `get_ces` Example
+#### `get_ces` example
 ```
 # install the cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -47,10 +47,9 @@ Character string argument calls for each CES survey can be accessed through the 
 
 The structure of `get_ces()` makes it possible to download and load the same dataset more than once. Before downloading the requested survey file, `get_ces()` checks if the file already exists in the download directory. While the function is designed to remove the downloaded file and associated directory, checking if the file already exists alerts the function if something is wrong. By checking if the file exists and not if the data object exists, the `get_ces` function is then able to load the requested dataset more than once, thereby allowing an unmanipulated version of a dataset to be loaded if so required.
 
+CES survey dataset files are either of `.dta` or `.sav` filetype, meaning the datasets are loaded into R as the type `labelled`. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to convert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used.
 
-CES survey dataset files are either of `.dta` or `.sav` filetype, meaning the datasets are loaded into R as the type `labelled`. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to covnert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used.\
-
-### `to_factor` Example
+#### `to_factor` example
 ```
 # install cesR package from GitHub
 devtools::intall_github("hodgettsp/cesR")
@@ -71,15 +70,20 @@ head(ces2019_web)
 Supporting functions in `cesR` include `get_cescodes()`, `get_question()` and `get_decon()`.
 
 ### get_cescodes()
-The supporting function `get_cescodes()` does not take any arguments, but instead when called it prints a dataframe that contains the survey codes and their associated variable calls. It includes both the character and index.
+The function `get_cescodes()` does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls.
 
+#### `get_cescodes` example
 ```
+# install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
 
+# load cesR package into RStudio
 library(cesR)
 
+# call CES survey argument calls
 get_cescodes()
 ```
+Console
 ```
 >get_cescodes()
    index ces_survey_code get_ces_call_char 
@@ -107,7 +111,7 @@ get_cescodes()
 22    22         ces1965         "ces1965"
 ```
 
-The function works by constructing a table from three separate vectors, removes the vectors, and then prints the results. It does not create any variable that is available in the global environment.
+The `get_cescodes` function works by constructing two vectors, one vector contains the CES survey codes and the other contiaining the assocaited survey argument calls. The function then creates dataframes of two vectors using the `data.frame` function from the `base` package and adds an index number column using the `seq` function from the `base` package (R Core Team, 2020). The dataframes are then merged into a new dataframe using the `merge` function from the `base` package (R Core Team, 2020) by the index number column. Column names in the new dataframe are then renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020) and the vector objects are removed from the RStudio environment. The function does not create any variable that is available in the global environment.
 
 ### get_decon()
 When called, `get_decon()` creates a subset of the CES 2019 online survey under the name `decon` (demographics and economics). This is done in the same way that the complete survey datasets are loaded into R. The function calls on a url and temporarily downloads the associated files using the `download.file()` function. After unpacking the compressed folder with the `unzip()` function, the file is read into R using the `haven` package. 20 variables are then selected from the main CES 2019 online survey table using the `select()` function from the `dplyr` package (Wickham et al., 2020) and renamed using the `rename()` function from the same package. The data frame values are then converted to factors using the `to_factor()` function from the `labelled()` package (Lamarange, 2020). A new variable, consisting of participants' responses to their position on the political spectrum, is then created from two other variables using the `unite()` function from the `tidyr` package (Wickham & Henry, 2020). All empty cells are replaced with `NA` values using the `mutate()` function from the `dplyr` package. Lastly, the data frame is assigned as a variable available in the global envrionment and the files are removed from the computer using the `unlink()` function. A citation for the CES 2019 online survey is also printed to the console.
