@@ -10,24 +10,30 @@ The R package `cesR` ('caesar'), provides a means of accessing the CES datasets.
 
 The `cesR` package is important because it makes working with Canadian Election Study survey datasets easier. By circumventing the need to find, download, and read in a dataset, `cesR` removes the requirement of setting a working directory thereby making the process of setting up a data file for use in R much easier. This makes working between computers easier, meaning that R projects can easily be shared between team members without the concern of a file being properly read or code not working due to different working directories. Additionally, by creating a subset of the CES 2019 online survey through a built-in function call, the `cesR` provides educators with an important tool that can be used to aid in the teaching of the statistical exploration of survey data.
 
-Our package is functionally complimentary to working in RStudio by minimizing the number of steps required to load in a dataset and removing the need of storing data file. Furthermore, the `cesR` package complements the work being done in the R community by building on the work being done through other packages that pull in survey data such as `dataverse` (Leeper, 2017) and `cancensus` (von Bergmann et al., 2020).
+Our package is functionally complimentary to working in RStudio by minimizing the number of steps required to load in a dataset and removing the need of storing data file. Furthermore, the `cesR` package complements the work being done in the R community by building on the work being done through other R packages that pull in survey data such as `dataverse` (Leeper, 2017) and `cancensus` (von Bergmann et al., 2020).
 
 *Note to self: need a transition between intro and functions*
 
+
+
 # Functions
 
-*Section needs to be properly updated to match new function*
+The `cesR` package has four functions included within it. These are, `get_ces`, `get_cescodes`, `get_question`, and `get_decon`.
 
 ## Key functions
-The main function in `cesR` is `get_ces()`. This function returns the requested CES survey as a usable data object, a url to the original download destination, and the citation for the survey when provided with an associated survey code.
+The main function in `cesR` is `get_ces()`. When called, this function returns a requested CES survey as a usable data object and prints out the associated citation and url for the survey dataset download location in the console.
 
-The `get_ces()` function can be used in the following way. The first is to use the function with a character string in the survey call argument. For instance, `get_ces()` could be used in the following way to access the CES 2019 online survey. 
+The `get_ces()` function takes one argument in the form of a character string. This argument is a name of a vector item that has been associated with a CES survey that when used calls the download url for that survey on an associated GitHub repository. If the provided character string argument matches a member of a built-in vector, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip file and is stored temporarily in the `inst/extdata` folder in the package directory. If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console. Upon downloading the file, the compressed folder is unzipped using the `unzip` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the filetype of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Lastly, the citation for the requested survey dataset and url for the survey data storage location are printed in the console.
 
+### Example
 ```
+# install the cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
 
+# load the cesR package into RStudio
 library(cesR)
 
+# call the 2019 CES online survey
 get_ces("ces2019_web")
 ```
 
@@ -37,11 +43,10 @@ TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
 ```
 
-Character string calls can be accessed through the secondary function `get_cescodes()` discussed in the [*Supporting functions*](#Supporting-functions) section below.
+Character string argument calls for each CES survey can be accessed through the `get_cescodes()` function discussed in the [*Supporting functions*](#Supporting-functions) section.
 
-The `get_ces()` function takes one argument, either a character string call or index call, which calls the URL of an associated GitHub repository. If the provided call matches a member of a built-in vector, the associated file is downloaded using the `download.file()` function as a compressed .zip file and is stored temporarily in the package directory. If the provided call does not have a match in the built-in vector, then the process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the console. Upon downloading the file, the folder is unzipped using the `unzip` function and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` package (Wickham & Miller, 2020). The data frame is then assigned using the `assign()` function as a data object in the global environment. The downloaded file and temporary file directory are then removed from the computer using the `unlink()` function. The citation for the survey dataset and original download location are printed in the console.
+The structure of `get_ces()` makes it possible to download and load the same dataset more than once. Before downloading the requested survey file, `get_ces()` checks if the file already exists in the download directory. While the function is designed to remove the downloaded file and associated directory, checking if the file already exists allows the function to know if something has not performed correctly. 
 
-Due to the structure of `get_ces()` it is possible to load the same dataset twice. This allows the downloaded files to be removed from the computer, while also allowing a dataset to be reloaded incase an unmanipulated version is required.
 
 Dataset files are either of the type '.dta' or '.sav', meaning the datasets are loaded into R as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so as to not interfere with workflow. It is suggested that to do so, the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used. An example is presented below.
 
@@ -122,6 +127,7 @@ ces2019_web|Canadian citizen|1998|A woman|Quebec|Master's degree|2|NA|2|Catholic
 ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ Judaism/ Jewish Orthodox|Heterosexual|NA|English|NA|NA|Student and working for pay|NA|$110,001 to $150,000|Never Married|Got worse|Worse|Not made much difference
 
 
+
 # Vignette
 
 ## Creating a subset of the CES 2019 phone survey dataset
@@ -184,6 +190,8 @@ Regarding the CES survey datasets, currently the datasets are downloaded from an
 One future step to eliminate this possible issue is to link the `get_ces` call directly to the download url of the survey as opposed to the current call to the Github repository.
 
 Lastly, another future step will be to build more subsets of the surveys. Including the division of survey sections into their own subsets, so that topics may be more easily analysed.
+
+
 
 # References
 
