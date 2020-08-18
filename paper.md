@@ -2,19 +2,21 @@
 
 # Introduction
 
-**(Will need to come back to this once the rest of the paper is done.)**
+**Note: will need to come back to this once the rest of the paper is done.**
 
-Beginning in 1965 with the most recent survey being conducted in 2019, the Canadian Election Study (CES) is a series of surveys that seek to enhance the understanding of Canadian elections by providing insight into the intentions of voters, what issues voters deem important, and the perception of parties and candidates (Canadian Election Study, n.d.) **(Could not find an exact date for this citation as the site loads as a cache with the date of retrieval)**.
+The Canadian Election Study (CES) is a series of surveys that seek to enhance the understanding of Canadian elections by providing insight into the intentions of voters, what issues voters deem important, and the perception of parties and candidates (Canadian Election Study, n.d.) **(Could not find an exact date for this citation as the site loads from a cache with the date of retrieval)**.
 
-The R package `cesR` ('caesar'), provides a means of accessing the CES datasets. It does not require storing data files nor the reading of a file from a working directory, nor does it require users to navigate to various websites and create accounts. Instead, `cesR` temporarily downloads a compressed '.zip' file of a requested CES survey dataset, unzips the file, and reads the dataset into R and RStudio (R Core Team, 2020; RStudio Team, 2020) as a data object, and then removes the downloaded and unzipped files from the computer. Additionally, `cesR` provides a subset of the 2019 CES online survey that has been prepared in an opinionated way and can be accessed through its own function call.
+The R package `cesR` ('caesar'), provides a means of accessing the CES datasets. It does not require storing data files nor the reading of a file from a working directory, nor does it require users to navigate to various websites and create accounts. Instead, `cesR` temporarily downloads a compressed '.zip' file of a requested CES survey dataset, unzips the file, and reads the dataset using R into RStudio (R Core Team, 2020; RStudio Team, 2020) as a data object, and then removes the downloaded and unzipped files from the computer. Additionally, `cesR` provides a subset of the 2019 CES online survey that has been prepared in an opinionated way and can be accessed through its own function call.
 
 The `cesR` package is important because it makes working with Canadian Election Study survey datasets easier. By circumventing the need to find, download, and read in a dataset, `cesR` removes the requirement of setting a working directory thereby making the process of setting up a data file for use in R much easier. This makes working between computers easier, meaning that R projects can easily be shared between team members without the concern of a file being properly read or code not working due to different working directories. Additionally, by creating a subset of the CES 2019 online survey through a built-in function call, the `cesR` provides educators with an important tool that can be used to aid in the teaching of the statistical exploration of survey data.
 
-Our package is functionally complimentary to working in R Studio by minimizing the number of steps required to load in a dataset and removing the need of storing data file. Furthermore, the `cesR` package complements the work being done in the R community by building on the work being done through other packages that pull in survey data such as `dataverse` **(Paul: please add citation)** and `cancensus` **(Paul: please add citation)**.
+Our package is functionally complimentary to working in RStudio by minimizing the number of steps required to load in a dataset and removing the need of storing data file. Furthermore, the `cesR` package complements the work being done in the R community by building on the work being done through other packages that pull in survey data such as `dataverse` (Leeper, 2017) and `cancensus` (von Bergmann et al., 2020).
 
-The remainder of our paper is structured as follows: ...
+**Note to self: need a transition between intro and functions**
 
 # Functions
+
+The `cesR` package 
 
 ## Key functions
 The main function in `cesR` is `get_ces()`. This function returns the requested CES survey as a usable data object, a url to the original download destination, and the citation for the survey when provided with an associated survey code.
@@ -210,3 +212,7 @@ Canadian Election Study (n.d.). *CES Canadian Election Study EEC Etude electoral
 R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 
 RStudio Team (2020). RStudio: Integrated Development Environment for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
+
+Thomas J. Leeper (2017). dataverse: R Client for Dataverse 4. R package version 0.2.0.
+
+von Bergmann, J., Dmitry Shkolnik, and Aaron Jacobs (2020). cancensus: R package to access, retrieve, and work with Canadian Census data and geography. v0.3.2.
