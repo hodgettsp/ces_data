@@ -116,13 +116,58 @@ Console
 The `get_cescodes` function works by constructing two vectors, one vector contains the CES survey codes and the other contiaining the assocaited survey argument calls. The function then creates dataframes of two vectors using the `data.frame` function from the `base` package and adds an index number column using the `seq` function from the `base` package (R Core Team, 2020). The dataframes are then merged into a new dataframe using the `merge` function from the `base` package (R Core Team, 2020) by the index number column. Column names in the new dataframe are then renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020) and the vector objects are removed from the RStudio environment. The function does not create any variable that is available in the global environment.
 
 ### get_decon()
-When called, `get_decon()` creates a subset of the CES 2019 online survey under the name `decon` (demographics and economics). This is done in the same way that the complete survey datasets are loaded into R. The function calls on a url and temporarily downloads the associated files using the `download.file()` function. After unpacking the compressed folder with the `unzip()` function, the file is read into R using the `haven` package. 20 variables are then selected from the main CES 2019 online survey table using the `select()` function from the `dplyr` package (Wickham et al., 2020) and renamed using the `rename()` function from the same package. The data frame values are then converted to factors using the `to_factor()` function from the `labelled()` package (Lamarange, 2020). A new variable, consisting of participants' responses to their position on the political spectrum, is then created from two other variables using the `unite()` function from the `tidyr` package (Wickham & Henry, 2020). All empty cells are replaced with `NA` values using the `mutate()` function from the `dplyr` package. Lastly, the data frame is assigned as a variable available in the global envrionment and the files are removed from the computer using the `unlink()` function. A citation for the CES 2019 online survey is also printed to the console.
+When called, `get_decon()` takes no arugments and creates a subset of the 2019 CES online survey under the name `decon` (demographics and economics) when called. The function first checks the global environment if an object named `decon` exists using the `exists` function from `base` package (R Core Team, 2020). This prevents the `decon` dataset from being recreated. If a situation arises in which the `decon` dataset would need to be recreated, then the best course of action is to use the `rm` function from the `base` package (R Core Team, 2020) to remove the `decon` object and then run the `get_decon()` function again. If the `get_decon` function is run when an object with the name `decon` already exists a warning will print in the console stating `Error in get_decon() : Warning: File already exists.`
 
+#### `get_decon` example 1
 ```
+# install cesR package
 devtools::install_github("hodgettsp/cesR")
 
+# load cesR package
 library(cesR)
 
+# load decon dataset
+get_decon()
+head(decon)
+
+# relaoad decon
+get_decon()
+```
+```
+Console
+
+Error in get_decon() : Warning: File already exists.
+```
+```
+# install cesR package
+devtools::install_github("hodgettsp/cesR")
+
+# load cesR package
+library(cesR)
+
+# load decon dataset
+get_decon()
+head(decon)
+
+# remove decon object
+rm(decon)
+
+# relaoad decon
+get_decon()
+```
+
+After checking if an object with the name `decon` exists, the `get_decon` function performs similarily to the `get_ces` function. It assigns a temporary file extension with a `.zip` file type using the `tempfile` function from the `base` package, and calls on a url and temporarily downloads the associated files using the `download.file` function from the `base` package (R Core Team, 2020). After unpacking the compressed folder with the `unzip` function from the `utils` package (R Core Team, 2020), the file is read into R using the `read_dta` function from the `haven` package (Wickham & Miller, 2020). Using the `select` function from the `dplyr` package, 20 variables are then selected from the main CES 2019 online survey and renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020). The data frame values are then converted to a factor type using the `to_factor` function from the `labelled` package (Lamarange, 2020). A new variable, consisting of participants' responses to their self-perceived position on the political spectrum, is then created from two variables using the `unite` function from the `tidyr` package (Wickham & Henry, 2020) and all empty cells are replaced with `NA` values using the `mutate` function from the `dplyr` package (Wickham et al., 2020). The dataset is made available in the global environment by using the `assign` function from the `base` package to create a new data object under the name `decon`. Lastly, the downloaded files are removed from the computer using the `unlink` function from the `base` package (R Core Team, 2020) and a citation for the 2019 CES online survey and a url to the storage location is printed to the console.
+
+
+#### `get_decon` example 2
+```
+# install cesR package
+devtools::install_github("hodgettsp/cesR")
+
+# load cesR package into RStudio
+library(cesR)
+
+# call decon dataset
 get_decon()
 head(decon)
 ```
