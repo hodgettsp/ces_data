@@ -25,7 +25,7 @@ The main function in `cesR` is `get_ces()`. When called, this function returns a
 
 The `get_ces()` function takes one argument in the form of a character string. This argument is a name of a vector item that has been associated with a CES survey that when used calls the download url for that survey on an associated GitHub repository. If the provided character string argument matches a member of a built-in vector, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip file and is stored temporarily in the `inst/extdata` folder in the package directory. If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console. Upon downloading the file, the compressed folder is unzipped using the `unzip` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the filetype of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Lastly, the citation for the requested survey dataset and url for the survey data storage location are printed in the console.
 
-### Example
+### `get_ces` Example
 ```
 # install the cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -36,7 +36,7 @@ library(cesR)
 # call the 2019 CES online survey
 get_ces("ces2019_web")
 ```
-
+Console
 ```
 TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
 
@@ -45,19 +45,25 @@ LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/D
 
 Character string argument calls for each CES survey can be accessed through the `get_cescodes()` function discussed in the [*Supporting functions*](#Supporting-functions) section.
 
-The structure of `get_ces()` makes it possible to download and load the same dataset more than once. Before downloading the requested survey file, `get_ces()` checks if the file already exists in the download directory. While the function is designed to remove the downloaded file and associated directory, checking if the file already exists allows the function to know if something has not performed correctly. 
+The structure of `get_ces()` makes it possible to download and load the same dataset more than once. Before downloading the requested survey file, `get_ces()` checks if the file already exists in the download directory. While the function is designed to remove the downloaded file and associated directory, checking if the file already exists alerts the function if something is wrong. By checking if the file exists and not if the data object exists, the `get_ces` function is then able to load the requested dataset more than once, thereby allowing an unmanipulated version of a dataset to be loaded if so required.
 
 
-Dataset files are either of the type '.dta' or '.sav', meaning the datasets are loaded into R as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so as to not interfere with workflow. It is suggested that to do so, the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used. An example is presented below.
+CES survey dataset files are either of `.dta` or `.sav` filetype, meaning the datasets are loaded into R as the type `labelled`. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to covnert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used.\
 
+### `to_factor` Example
 ```
+# install cesR package from GitHub
 devtools::intall_github("hodgettsp/cesR")
 
+# load cesR package into RStudio
 library(cesR)
 
+# request 2019 CES online survey
 get_ces("ces2019_web")
 
-ces2019_wen <- labelled::to_factor(ces2019_web)
+# convert dataframe values to factor type
+# check column heads for dataframe
+ces2019_web <- labelled::to_factor(ces2019_web)
 head(ces2019_web)
 ```
 
