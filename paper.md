@@ -36,8 +36,9 @@ library(cesR)
 # call the 2019 CES online survey
 get_ces("ces2019_web")
 ```
-Console
 ```
+Console
+
 TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
 
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
@@ -83,8 +84,9 @@ library(cesR)
 # call CES survey argument calls
 get_cescodes()
 ```
-Console
 ```
+Console
+
 >get_cescodes()
    index ces_survey_code get_ces_call_char 
 1      1     ces2019_web     "ces2019_web" 
@@ -125,6 +127,8 @@ get_decon()
 head(decon)
 ```
 ```
+Console
+
 TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
 
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
