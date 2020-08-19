@@ -10,7 +10,7 @@ The R package `cesR` ('caesar'), provides a means of accessing the CES datasets.
 
 The `cesR` package is important because it makes working with Canadian Election Study survey datasets easier. By circumventing the need to find, download, and read in a dataset, `cesR` removes the requirement of setting a working directory thereby making the process of setting up a data file for use in R much easier. This makes working between computers easier, meaning that R projects can easily be shared between team members without the concern of a file being properly read or code not working due to different working directories. Additionally, by creating a subset of the CES 2019 online survey through a built-in function call, the `cesR` provides educators with an important tool that can be used to aid in the teaching of the statistical exploration of survey data.
 
-Our package is functionally complimentary to working in RStudio by minimizing the number of steps required to load in a dataset and removing the need of storing data files. Furthermore, the `cesR` package complements the work being done in the R community by building on the work being done through other R packages that pull in survey data such as `dataverse` (Leeper, 2017) and `cancensus` (von Bergmann et al., 2020).
+Our package is functionally complimentary to working in RStudio by minimizing the number of steps required to load in a dataset and removing the need of storing data files. Furthermore, the `cesR` package complements the work being done in the R community by building on the work being done through other R packages that pull in survey data such as `dataverse` (Leeper, 2017) and `cancensus` (von Bergmann et al., 2020). Addtionally, this package follows other R packages in making access to data easier. Packages such as, `opendatatoronto` (Gelfand, 2020), `Lahman` (Friendly et al., 2020), `fueleconomy` (Wickham, 2020), and `nasaweather` (Wickham, 2014). As such, the `cesR` package contributes to an existing community *(not the right word but too tired to think of the right one)* of R packages that makes accessing various types of data in R easier.
 
 
 # Functions
@@ -307,12 +307,21 @@ Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R package versio
 
 Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.0. https://CRAN.R-project.org/package=dplyr
 
+Hadley Wickham (2020). fueleconomy: EPA Fuel Economy Data. R package version 1.0.0.
+  https://CRAN.R-project.org/package=fueleconomy
+
 Joseph Larmarange (2020). labelled: Manipulating Labelled Data. R package version 2.5.0. https://CRAN.R-project.org/package=labelled
+
+Michael Friendly, Chris Dalzell, Martin Monkman and Dennis Murphy (2020). Lahman: Sean 'Lahman' Baseball Database. R package
+  version 8.0-0. https://CRAN.R-project.org/package=Lahman
 
 R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
 
 RStudio Team (2020). RStudio: Integrated Development Environment for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
 
 Thomas J. Leeper (2017). dataverse: R Client for Dataverse 4. R package version 0.2.0.
+
+Sharla Gelfand (2020). opendatatoronto: Access the City of Toronto Open Data Portal. R package version 0.1.3.
+  https://CRAN.R-project.org/package=opendatatoronto
 
 von Bergmann, J., Dmitry Shkolnik, and Aaron Jacobs (2020). cancensus: R package to access, retrieve, and work with Canadian Census data and geography. v0.3.2.
