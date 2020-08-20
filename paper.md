@@ -16,9 +16,7 @@ The `cesR` package has four functions. These are `get_ces()`, `get_cescodes()`, 
 
 ## Main function
 
-The main function in `cesR` is `get_ces`. When called, this function returns a requested CES survey as a usable data object and prints out the associated citation and url for the survey dataset download location in the console.
-
-The `get_ces()` function takes one argument in the form of a character string. This argument is a name of a vector item that has been associated with a CES survey that when used calls the download url for that survey on an associated GitHub repository. If the provided character string argument matches a member of a built-in vector, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip file and is stored temporarily in the `inst/extdata` folder in the package directory. If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the filetype of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Lastly, the citation for the requested survey dataset and url for the survey data storage location are printed in the console.
+When called the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and url for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector item that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download url for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of a built-in vector, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip file and is stored temporarily in the `inst/extdata` folder in the package directory. If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the filetype of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Lastly, the citation for the requested survey dataset and url for the survey data storage location are printed in the console.
 
 #### `get_ces()` example
 ```
@@ -32,8 +30,6 @@ library(cesR)
 get_ces("ces2019_web")
 ```
 ```
-Console
-
 TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
 
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
@@ -80,8 +76,6 @@ library(cesR)
 get_cescodes()
 ```
 ```
-Console
-
 >get_cescodes()
    index ces_survey_code get_ces_call_char 
 1      1     ces2019_web     "ces2019_web" 
@@ -129,8 +123,6 @@ get_question("ces2019_phone", "q11")
 ```
 
 ```
-Console
-
 Which party will you likely to vote for
 ```
 
@@ -152,8 +144,6 @@ head(decon)
 get_question("decon", "education")
 ```
 ```
-Console
-
 What is the highest level of education that you have completed?
 ```
 
@@ -177,8 +167,6 @@ head(decon)
 get_decon()
 ```
 ```
-Console
-
 Error in get_decon() : Warning: File already exists.
 ```
 ```
@@ -215,8 +203,6 @@ get_decon()
 head(decon)
 ```
 ```
-Console
-
 TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
 
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
