@@ -93,13 +93,11 @@ head(ces2019_web)
 2019-09-13 10:10:20 | 2019-09-13 10:29:45 | R_3LiGZcCWJEcWV~ | I consent to~ | Canadian citizen | 1999 | NA | A woman | Ontario| Some university |
 
 
-Code for the `get_ces()` function can be found in the `getces.R` file located in the folder `R` in the `cesR` package directory.
-
 ## Supporting functions
 Along with the main function `get_ces()`, the `cesR` package provides three support functions in `cesR` include `get_cescodes()`, `get_question()` and `get_decon()`. Where `get_cescodes()` and `get_question()` play a directly supportive role to `get_ces()`, `get_decon()` is supportive in that it provides a secondary tool to be used outside the standard use of the `cesR` package and the `get_ces()` function.
 
 ### get_cescodes()
-The `get_cescodes()` function provides a user a means of looking up the argument calls that are used to access each CES survey dataset. The `get_cescodes()` function does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls. See [*Example 4: `get_cescodes()` function*](#example-4-get_cescodes-function) for an example of the print output and the [*Vignette*](#vignette) section for an example of the functions use in conjunction with the `get_ces()` function.
+The `get_cescodes()` function provides a user a means of looking up the argument calls that are used to access each CES survey dataset. The `get_cescodes()` function does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls. See [*Example 4: `get_cescodes()` function*](#example-4-get_cescodes-function) for an example of the print output and the [*Vignette*](#vignette) section for an example of the function in conjunction with the `get_ces()` function.
 
 #### Example 4: `get_cescodes()` function
 ```
@@ -109,7 +107,7 @@ devtools::install_github("hodgettsp/cesR")
 # load cesR package into RStudio
 library(cesR)
 
-# call CES survey argument calls
+# get CES survey argument calls
 get_cescodes()
 ```
 ```
@@ -139,12 +137,12 @@ get_cescodes()
 22    22         ces1965         "ces1965"
 ```
 
-The `get_cescodes()` function works by constructing two vectors, one vector contains the CES survey codes and the other containing the associated survey argument calls. The function then creates dataframes of two vectors using the `data.frame()` function from the `base` package and adds an index number column using the `seq()` function from the `base` package (R Core Team, 2020). The dataframes are then merged into a new dataframe using the `merge()` function from the `base` package (R Core Team, 2020) by the index number column. Column names in the new dataframe are then renamed using the `rename()` function from the `dplyr` package (Wickham et al., 2020) and the vector objects are removed from the RStudio environment. The function does not create any variable that is available in the global environment.
+The `get_cescodes()` function works by constructing two vectors, one vector contains the CES survey codes and the other containing the associated survey argument calls. The function then creates dataframes of two vectors using the `data.frame()` function from the `base` package and adds an index number column using the `seq()` function from the `base` package (R Core Team, 2020) by which to merge the dataframes. Using the `merge()` function from the `base` package (R Core Team, 2020), the dataframes are then merged by the index number into a new dataframe. Using the index number ensures the dataframes remain ordered and merge correctly across rows. Column names in the new dataframe are then renamed using the `rename()` function from the `dplyr` package (Wickham et al., 2020) and the vector objects are removed from the environment. The `get_cescodes()` function does not create any variable that is available in the global environment.
 
 ### get_question(do, q)
-The `get_question()` function takes two arguments. The name of a data object and the name of a column in the data object. Both arguments must be given as character strings. The function works such that it checks whether the given name for a data object exists using the `exists()` function from the `base` package (R Core Team, 2020). If the object does not exist, the function will print out a warning in the console stating `Warning: Data object does not exist`. If the object does exist, the function will check if the given column name exists in the given data object. This is done using a combination of the `hasName()` function from the `utils` package and the `get()` function from the `base` package (R Core Team, 2020). The `hasName()` function checks if the given column name is in the given data object. Because the arguments are given as character strings the `get()` function is used to return the actual data object instead of the provided character string. Otherwise the `hasName()` function would only check if the given column name argument occurred in the given data object character string argument and not the actual data object. If the column does not exist in the data object a warning is printed in the console stating `Warning: Variable is not in dataset`. If the given column exists in the given data object, the `get_question()` function will print in the console the variable label of the given column using a combination of the `var_label()` function from the `labelled` package (Larmarange, 2020) and the `get()` function from the `base` package (R Core Team, 2020). The `get()` function is used for the same purpose as it was earlier in the function, which is to return the actual object and not the given character string argument.
+The `get_question()` provides users with the ability to look up a survey question associated with a given column name. The function takes two arguments in the form of character strings, those being the name of a data object and the name of a column in the given data object. The function works such that it checks whether the given data object exists using the `exists()` function from the `base` package (R Core Team, 2020). If the object does not exist, the function will print out a warning in the console stating `Warning: Data object does not exist` (see [*Example 6: `get_question()` data object error*](#example-6-get_question-data-object-error) for an example of this error). If the object does exist, the `get_question()` will check if the given column name exists in the given data object. This is done using a combination of the `hasName()` function from the `utils` package and the `get()` function from the `base` package (R Core Team, 2020). The `hasName()` function checks if the given column name is in the given data object. Because the arguments are given as character strings the `get()` function is used to return the actual data object instead of the provided character string. Otherwise, the `hasName()` function would only check if the given column name argument occurred in the given character string argument and not the actual data object. If the column does not exist in the data object a warning is printed in the console stating `Warning: Variable is not in dataset`. See [*Example 7: `get_question()` variable error*](#example-7-get_question-variable-error) for an example of this error message. If the given column exists in the given data object, `get_question()` will print the variable label of the given column to the console using a combination of the `var_label()` function from the `labelled` package (Larmarange, 2020) and the `get()` function from the `base` package (R Core Team, 2020). See [*Example 5: `get_question()` basics*](#example-5-get_question-basics) for an example of the general use of the `get_question()` function.
 
-#### `get_question()` example 1
+#### Example 5: `get_question()` basics
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -163,9 +161,48 @@ get_question("ces2019_phone", "q11")
 Which party will you likely to vote for
 ```
 
+#### Example 6: `get_question()` data object error
+```
+# install cesR package from GitHub
+devtools::install_github("hodgettsp/cesR")
+
+# load package into library
+library(cesR)
+
+# load 2019 phone dataset
+get_ces("ces2019_phone")
+
+# get question for column q11
+get_question("2019_phone", "q11")
+```
+
+```
+Warning: Data object does not exist
+```
+
+#### Example 7: `get_question()` variable error
+```
+# install cesR package from GitHub
+devtools::install_github("hodgettsp/cesR")
+
+# load package into library
+library(cesR)
+
+# load 2019 phone dataset
+get_ces("ces2019_phone")
+
+# get question for column q11
+get_question("ces2019_phone", "11")
+```
+
+```
+Warning: Variable is not in dataset
+```
+
+
 The `get_question()` function is structured in such a way that it is not limited to use with data objects created by the `get_ces()` function. It can also be used to return the column label for the `decon()` dataset or any dataset of the labelled type.
 
-#### `get_question()` example 2
+#### Example 7: `get_question()` `decon`
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
