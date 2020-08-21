@@ -96,7 +96,7 @@ head(ces2019_web)
 Code for the `get_ces()` function can be found in the `getces.R` file located in the folder `R` in the `cesR` package directory.
 
 ## Supporting functions
-Supporting functions in `cesR` include `get_cescodes()`, `get_question()` and `get_decon()`.
+Along with the main function `get_ces()`, the `cesR` package provides three support functions in `cesR` include `get_cescodes()`, `get_question()` and `get_decon()`. Where `get_cescodes()` and `get_question()` play a directly supportive role to `get_ces()`, `get_decon()` is supportive in that it provides a secondary tool to be used outside the standard use of the `cesR` package and the `get_ces()` function.
 
 ### get_cescodes()
 The function `get_cescodes()` does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls.
