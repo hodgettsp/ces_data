@@ -222,9 +222,9 @@ What is the highest level of education that you have completed?
 
 
 ### get_decon()
-When called, `get_decon()` takes no arguments and creates a subset of the 2019 CES online survey under the name `decon` (demographics and economics) when called. The function first checks the global environment if an object named `decon` exists using the `exists()` function from `base` package (R Core Team, 2020). This prevents the `decon` dataset from being recreated. If a situation arises in which the `decon` dataset would need to be recreated, then the best course of action is to use the `rm()` function from the `base` package (R Core Team, 2020) to remove the `decon` object and then run the `get_decon()` function again. If the `get_decon()` function is run when an object with the name `decon` already exists a warning will print in the console stating `Error in get_decon() : Warning: File already exists.`
+When called, creates a subset of the 2019 CES online survey under the name `decon` (demographics and economics) that provides a tool for educators in the teaching of the analysis of large survey datasets. The `get_decon()` function takes no arguments. The function first checks the global environment if an object named `decon` exists using the `exists()` function from the `base` package (R Core Team, 2020). This prevents the `decon` dataset from being recreated if the object exists. If the `get_decon()` function is run when an object with the name `decon` already exists a warning will print in the console stating `Error in get_decon() : Warning: File already exists.` See [*Example 9: `get_decon()` error*](#example-9-get_decon-error) for an example of the error message. If a situation arises in which the `decon` dataset needs to be recreated, then the best course of action is to use the `rm()` function from the `base` package (R Core Team, 2020) to remove the `decon` object and then run the `get_decon()` function again (see [*Example 10: `get_decon()` reload*](#example-10-get_decon-reload)). 
 
-#### `get_decon()` example 1
+#### Example 9: `get_decon()` error
 ```
 # install cesR package
 devtools::install_github("hodgettsp/cesR")
@@ -242,6 +242,8 @@ get_decon()
 ```
 Error in get_decon() : Warning: File already exists.
 ```
+
+#### Example 10: `get_decon()` reload
 ```
 # install cesR package
 devtools::install_github("hodgettsp/cesR")
