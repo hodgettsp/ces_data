@@ -37,7 +37,7 @@ TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
 ```
 
-#### Example 2: get
+#### Example 2: `get_ces()` error
 ```
 # install the cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
