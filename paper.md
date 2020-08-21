@@ -18,7 +18,9 @@ The `cesR` package has four functions. These are `get_ces()`, `get_cescodes()`, 
 
 ## Main function
 
-When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and url for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download url for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*Example 2: `get_ces()` error*](#example-2-get_ces-error)). Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and url of the survey data storage location are printed in the console (see [*Example 1: `get_ces()` basics*](#example-1-get_ces-basics) for an example of a basic function call).
+When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and url for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download url for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and url of the survey data storage location are printed in the console (see [*Example 1: `get_ces()` basics*](#example-1-get_ces-basics) for an example of a basic `get_ces()` function call).
+
+If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*Example 2: `get_ces()` error*](#example-2-get_ces-error)). 
 
 #### Example 1: `get_ces()` basics
 ```
@@ -52,26 +54,32 @@ get_ces("2019ces_web")
 Error in get_ces("2019ces_web") : Warning: Code not in table.
 ```
 
-The character string argument calls for each CES survey can be accessed through the `get_cescodes()` function discussed in the [*Supporting functions*](#Supporting-functions) section.
+The character string argument calls for each CES survey are provided in the `get_cescodes()` function discussed in the [*Supporting functions*](#Supporting-functions) section.
 
-The structure of `get_ces()` makes it possible to download and load the same dataset more than once. Before downloading the requested survey file, `get_ces()` checks if the file already exists in the download directory. While the function is designed to remove the downloaded file and associated directory, checking if the file already exists alerts the function if something is wrong. By checking if the file exists and not if the data object exists, the `get_ces()` function is then able to load the requested dataset more than once, thereby allowing an unmanipulated version of a dataset to be loaded if so required.
+The structure of `get_ces()` makes it possible to call a CES survey more than once, but doing so will recreate the data object. When `get_ces()` is called, before downloading the requested survey file, `get_ces()` checks if the file already exists in the `inst/extdata` directory. While `get_ces()` is designed to remove the downloaded file, checking if the file already exists alerts the function if something is wrong. By checking if the file exists and not if the data object exists, the `get_ces()` function is able to load the requested dataset more than once, thereby allowing an unmanipulated version of a dataset to be loaded if so required. For example, if a loaded data object becomes corrupted or an unmanipulated version is needed, then using `get_ces()` to call the same CES survey will provide a clean copy.
 
-CES survey dataset files are either of `.dta()` or `.sav()` filetype, meaning the datasets are loaded into R as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to convert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used.
+CES survey dataset files usee ither a `.dta()` or `.sav()` file extension, meaning the datasets are loaded into R and RStudio as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to convert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used (see [*Example 3: `to_factor()` function*](#example-3-to_factor-function) for an example as to using the `to_factor()` function and `labelled` package).
 
-#### `to_factor()` example
+#### Example 3: `to_factor()` function
 ```
 # install cesR package from GitHub
 devtools::intall_github("hodgettsp/cesR")
 
+# install labelled package from CRAN
+install.packages("labelled")
+
 # load cesR package into RStudio
 library(cesR)
+
+# load the labelled package
+library(labelled)
 
 # request 2019 CES online survey
 get_ces("ces2019_web")
 
 # convert dataframe values to factor type
 # check column heads for dataframe
-ces2019_web <- labelled::to_factor(ces2019_web)
+ces2019_web <- to_factor(ces2019_web)
 head(ces2019_web)
 ```
 
