@@ -99,9 +99,9 @@ Code for the `get_ces()` function can be found in the `getces.R` file located in
 Along with the main function `get_ces()`, the `cesR` package provides three support functions in `cesR` include `get_cescodes()`, `get_question()` and `get_decon()`. Where `get_cescodes()` and `get_question()` play a directly supportive role to `get_ces()`, `get_decon()` is supportive in that it provides a secondary tool to be used outside the standard use of the `cesR` package and the `get_ces()` function.
 
 ### get_cescodes()
-The function `get_cescodes()` does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls.
+The `get_cescodes()` function provides a user a means of looking up the argument calls that are used to access each CES survey dataset. The `get_cescodes()` function does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls (see [*Example 4: `get_cescodes()` function*](#example-4-get_cescodes-function) for an example of the print output).
 
-#### `get_cescodes()` example
+#### Example 4: `get_cescodes()` function
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
