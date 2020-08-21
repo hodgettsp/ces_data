@@ -199,7 +199,7 @@ get_question("ces2019_phone", "11")
 Warning: Variable is not in dataset
 ```
 
-In addition to being usable with the data objects created from the `get_ces()` function, the `get_question()` function is structured in such a way that it can also be used to return the column label for the `decon` dataset or any dataset of the labelled type. [*Example 8: `get_question()` `decon`*](#ecample-8-get_question-decon) presents an example of the `get_question()` function being used with the `decon` dataset.
+In addition to being usable with the data objects created from the `get_ces()` function, the `get_question()` function is structured in such a way that it can also be used to return the column label for the `decon` dataset or any dataset of the labelled type. [*Example 8: `get_question()` `decon`*](#example-8-get_question-decon) presents an example of the `get_question()` function being used with the `decon` dataset.
 
 #### Example 8: `get_question()` `decon`
 ```
