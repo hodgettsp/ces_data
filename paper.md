@@ -199,10 +199,9 @@ get_question("ces2019_phone", "11")
 Warning: Variable is not in dataset
 ```
 
+In addition to being usable with the data objects created from the `get_ces()` function, the `get_question()` function is structured in such a way that it can also be used to return the column label for the `decon` dataset or any dataset of the labelled type. [*Example 8: `get_question()` `decon`](#ecample-8-get_question-decon) presents an example of the `get_question()` function being used with the `decon` dataset.
 
-The `get_question()` function is structured in such a way that it is not limited to use with data objects created by the `get_ces()` function. It can also be used to return the column label for the `decon()` dataset or any dataset of the labelled type.
-
-#### Example 7: `get_question()` `decon`
+#### Example 8: `get_question()` `decon`
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
