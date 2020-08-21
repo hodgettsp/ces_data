@@ -295,22 +295,42 @@ ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ J
 
 ## Creating a subset of the CES 2019 phone survey dataset
 
-While the `get_decon()` provides a subset of the CES 2019 online survey dataset, the `cesR` package lends itself to the subsetting of any of the CES survey datasets.
+While the `get_decon()` provides a subset of the CES 2019 online survey dataset, the general use of the `cesR` package is to access CES data and the subsetting of any of the CES survey datasets.
 
-The following presents a vignette of producing a subset of the CES 2019 phone survey dataset. This relies on the `cesR`, `labelled`, and `dplyr` packages.
+The following presents a vignette of calling and producing a subset of the 2019 CES phone survey dataset. This vignette uses functions from the `cesR`, `devtools`, `labelled`, and `dplyr` packages.
 
-To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is only available through the use of the `devtools` package. During installation RStudio may request to update other packages. It is best to press enter with an empty line.
+To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is currently only available through the use of the `install_github` function from the `devtools` package (Wickham et al., 2020). During installation, RStudio may request to update other packages. It is best to press enter with an empty line.
 ```
 # uncomment any package that needs to be installed
-devtools::install_github("hodgettsp/cesR")
+# install.packages("devtools")
 # install.packages("labelled")
 # install.packages("dplyr")
 # install.packages("tidyr")
+
+# install cesR package from GitHub
+devtools::install_github("hodgettsp/cesR")
 
 library(cesR)
 library(labelled)
 library(dplyr)
 ```
+```
+> devtools::install_github("hodgettsp/cesR")
+Downloading GitHub repo hodgettsp/cesR@HEAD
+These packages have more recent versions available.
+It is recommended to update all of them.
+Which would you like to update?
+
+1: All                          
+2: CRAN packages only           
+3: None                         
+4: cpp11 (0.1.0 -> 0.2.1) [CRAN]
+5: dplyr (1.0.0 -> 1.0.2) [CRAN]
+6: tidyr (1.1.0 -> 1.1.1) [CRAN]
+
+Enter one or more numbers, or an empty line to skip updates:
+```
+
 
 Upon installation and loading of the `cesR` package, use the `get_ces()` function to load in the desired CES survey dataset. In this case that is the CES 2019 phone survey.
 
@@ -388,14 +408,15 @@ UBC (n.d.). *Surveys*. Canadian Election Study Etude Electorale Canadienne. http
 
 von Bergmann, J., Dmitry Shkolnik, and Aaron Jacobs (2020). cancensus: R package to access, retrieve, and work with Canadian Census data and geography. v0.3.2.
 
-Hadley Wickham and Evan Miller (2020). haven: Import and Export 'SPSS', 'Stata' and 'SAS' Files. R package version 2.3.1. https://CRAN.R-project.org/package=haven
-
-Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R package version 1.1.0. https://CRAN.R-project.org/package=tidyr
+Hadley Wickham (2020). fueleconomy: EPA Fuel Economy Data. R package version 1.0.0. https://CRAN.R-project.org/package=fueleconomy
 
 Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.0. https://CRAN.R-project.org/package=dplyr
 
-Hadley Wickham (2020). fueleconomy: EPA Fuel Economy Data. R package version 1.0.0.
-  https://CRAN.R-project.org/package=fueleconomy
+Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R package version 1.1.0. https://CRAN.R-project.org/package=tidyr
+
+Hadley Wickham, Jim Hester and Winston Chang (2020). devtools: Tools to Make Developing R Packages Easier. R package version 2.3.1. https://CRAN.R-project.org/package=devtools
+
+Hadley Wickham and Evan Miller (2020). haven: Import and Export 'SPSS', 'Stata' and 'SAS' Files. R package version 2.3.1. https://CRAN.R-project.org/package=haven
 
 Wilkins-Laflamme, S. (2018). Islamaphobia in Canada: Measuring the realities of negative attitudes toward Muslims and religious discrimination. *Canadian Sociological Association*, *55*(1), 86-110.
 
