@@ -299,7 +299,9 @@ While the `get_decon()` provides a subset of the CES 2019 online survey dataset,
 
 The following presents a vignette of calling and producing a subset of the 2019 CES phone survey dataset. This vignette uses functions from the `cesR`, `devtools`, `labelled`, and `dplyr` packages.
 
-To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is currently only available through the use of the `install_github` function from the `devtools` package (Wickham et al., 2020). During installation, RStudio may request to update other packages. It is best to press enter with an empty line.
+To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is currently only available through the use of the `install_github` function from the `devtools` package (Wickham et al., 2020). During installation, RStudio may request to update other packages. It is best to press enter with an empty line (see [*Example 12: Install `cesR`*](#example-12-install-cesR)).
+
+#### Example 12: Install `cesR`
 ```
 # uncomment any package that needs to be installed
 # install.packages("devtools")
