@@ -54,7 +54,7 @@ get_ces("2019ces_web")
 Error in get_ces("2019ces_web") : Warning: Code not in table.
 ```
 
-The character string argument calls for each CES survey are provided in the `get_cescodes()` function discussed in the [*Supporting functions*](#Supporting-functions) section.
+The character string argument calls for each CES survey are provided in the `get_cescodes()` function discussed in the [*2.2 Supporting functions*](#22-Supporting-functions) section.
 
 The structure of `get_ces()` makes it possible to call a CES survey more than once, but doing so will recreate the data object. When `get_ces()` is called, before downloading the requested survey file, `get_ces()` checks if the file already exists in the `inst/extdata` directory. While `get_ces()` is designed to remove the downloaded file, checking if the file already exists alerts the function if something is wrong. By checking if the file exists and not if the data object exists, the `get_ces()` function is able to load the requested dataset more than once, thereby allowing an unmanipulated version of a dataset to be loaded if so required. For example, if a loaded data object becomes corrupted or an unmanipulated version is needed, then using `get_ces()` to call the same CES survey will provide a clean copy.
 
