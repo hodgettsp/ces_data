@@ -4,13 +4,13 @@
 
 *Note: will need to come back to this once the rest of the paper is done.*
 
-An election season brings with it a stream of predictions made using a variety of resources and methods. While election predictions can provide insight as to the direction of an election and voter intention during an election, a retrospective on an election can be as equally enlightening. Survey data of this sort can provide a better understanding of an election after-the-fact and can provide clarity as to the changes in the political climate over the years. The Canadian Election Study (CES) is a series of large-scale surveys conducted every election year that seeks to provide such a retrospective understanding to Canadian elections. By providing data on Canadian elections since 1965 up to, most recently, 2019 the CES provides insight into such topics as the intentions of voters, what issues voters deem important, and the perception of parties and candidates (Canadian Election Study, n.d.)*(Could not find an exact date for this citation as the site loads from a cache with the date of retrieval)*. For example, Bittner (2018) used CES data to assess the level of presidentialization experienced in Canadian elections over time; while other studies have used CES data to assess the level of Islamophobia in Canada (Wilkins-Laflamme, 2018), how anti-party rhetoric affects voter behaviour (Gidengil et al., 2001), and how political trust influences voter behaviour (Belanger & Nadeau, 2005). The collection of and access to such data is integral to this research and more being done into understanding Canadian elections and the political climate of Canada. In this regard, the R package `cesR` ('caesar'), as presented in this paper, seeks to compliment the work of the CES, social science research, and the teaching of statistical processes using survey data by providing a means for R users to easily access CES survey datasets.
+An election season brings with it a stream of predictions made using a variety of resources and methods. While election predictions can provide insight as to the direction of an election and voter intention during an election, a retrospective on an election can be equally enlightening. Survey data of this sort can provide a better understanding of an election after-the-fact and can provide clarity as to the changes in the political climate over the years. The Canadian Election Study (CES) is a series of large-scale surveys conducted every election year that seeks to provide such a retrospective understanding to Canadian elections. By providing data on Canadian elections since 1965 up to, most recently, 2019 the CES provides insight into such topics as the intentions of voters, what issues voters deem important, and the perception of parties and candidates (Canadian Election Study, 2019). For example, Bittner (2018) used CES data to assess the level of presidentialization experienced in Canadian elections over time; while other studies have used CES data to assess the level of Islamophobia in Canada (Wilkins-Laflamme, 2018), how anti-party rhetoric affects voter behaviour (Gidengil et al., 2001), and how political trust influences voter behaviour (Belanger & Nadeau, 2005). The collection of and access to such data is integral to this research. The R package `cesR` ('caesar'), as presented in this paper, seeks to complement the work of the CES, and enhance social science research and the teaching of statistical processes using survey data by providing a means for R users to easily access CES survey datasets.
 
-The CES survey datasets are publicly available from various repositories across the internet in various data types (Canadian Election Study, n.d.; UBC, n.d.; Odesi, n.d.). As the ability to find and access data is integral to quality research in any domain, the main function of the `cesR` package, `get_ces()`, brings together these various sources, providing R users with a means of easily accessing each CES survey dataset while also circumventing the need to download and store survey data files. Thereby also removing concerns of storage space. The structure of `cesR` also removes the need to call a data file from a directory, thereby making it easier to work with CES datasets between different workstations. Additionally, `cesR` also provides two helper functions, `get_cescodes()` and `get_question()`, and a function, `get_decon()`, that creates a subset of the 2019 CES online survey that has been prepared in an opinionated way. The helper functions provide users with the necessary arguments to call each CES dataset and also return a survey question for a given variable, while the subset of the 2019 CES online survey provides a tool for educators that can be used to aid in the teaching of statistical analysis of large survey datasets.
+The CES survey datasets are publicly available from various repositories across the internet in various data types (Canadian Election Study, 2019; UBC, n.d.; Odesi, n.d.). As the ability to find and access data is integral to quality research in any domain, the main function of the `cesR` package, `get_ces()`, brings together these various sources, providing R users with a means of easily accessing each CES survey dataset while also circumventing the need to download and store survey data files. The structure of `cesR` also removes the need to call a data file from a directory, thereby making it easier to work with CES datasets between different workstations. Additionally, `cesR` also provides two helper functions, `get_cescodes()` and `get_question()`, and a function, `get_decon()`, that creates a subset of the 2019 CES online survey that has been prepared in an opinionated way. The helper functions provide users with the necessary arguments to call each CES dataset and also return a survey question for a given variable, while the subset of the 2019 CES online survey provides a tool for educators that can be used to aid in the teaching of statistical analysis of large survey datasets.
 
 The `cesR` package is built using the R programming language and is designed to work within the R integrated development environment (IDE) RStudio (R Core Team, 2020; RStudio Team, 2020). Providing access to data is common in R packages and the `cesR` package follows and was inspired by the work being done in the R community through such packages as the `opendatatoronto` package (Gelfand, 2020), the `Lahman` package (Friendly et al., 2020), `fueleconomy` (Wickham, 2020), and `nasaweather` (Wickham, 2014). Furthermore, the `cesR` package is complementary to packages such as `dataverse` (Leeper, 2017) and `cancensus` (von Bergmann et al., 2020) that provide R users access to Canadian survey and census data. Packages such as these are important to R users as they improve the functionality of working within R by minimizing the number of steps required to load data and increasing the availability of data to R users. The `cesR` package adds to this community and expands on the inclusion of built-in data by temporarily downloading only the file requested and removing the file from the computer once a data object has been assigned to the dataset. 
 
-This paper introduces the `cesR` package and its main function `get_ces()`, which is used to create data objects from a called CES survey, as well as the secondary functions `get_cescodes()`, `get_question`, and `get_decon()`. In addition to discussing the construction of each function, examples and vignettes as to common function uses are provided.
+This paper introduces the `cesR` package and its main function `get_ces()`, which is used to create data objects from a called CES survey, as well as the secondary functions `get_cescodes()`, `get_question`, and `get_decon()`. In addition to discussing the construction of each function, examples and vignettes as to common use-cases are provided.
 
 # 2. Package Structure
 
@@ -18,7 +18,7 @@ The `cesR` package has four functions. These are `get_ces()`, `get_cescodes()`, 
 
 ## 2.1 Main function
 
-When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and URL for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download URL for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and URL of the survey data storage location are printed in the console (see [*2.1 Example 1: `get_ces()` basics*](#21-example-1-get_ces-basics) for an example of a basic `get_ces()` function call).
+When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and URL for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download URL for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  from the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and URL of the survey data storage location are printed in the console (see [*2.1 Example 1: `get_ces()` basics*](#21-example-1-get_ces-basics) for an example of a basic `get_ces()` function call).
 
 If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*2.1. Example 2: `get_ces()` error*](#21-example-2-get_ces-error)). 
 
@@ -58,7 +58,7 @@ The character string argument calls for each CES survey are provided in the `get
 
 The structure of `get_ces()` makes it possible to call a CES survey more than once, but doing so will recreate the data object. When `get_ces()` is called, before downloading the requested survey file, `get_ces()` checks if the file already exists in the `inst/extdata` directory. While `get_ces()` is designed to remove the downloaded file, checking if the file already exists alerts the function if something is wrong. By checking if the file exists and not if the data object exists, the `get_ces()` function is able to load the requested dataset more than once, thereby allowing an unmanipulated version of a dataset to be loaded if so required. For example, if a loaded data object becomes corrupted or an unmanipulated version is needed, then using `get_ces()` to call the same CES survey will provide a clean copy.
 
-CES survey dataset files usee ither a `.dta()` or `.sav()` file extension, meaning the datasets are loaded into R and RStudio as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to convert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used (see [*2.1 Example 3: `to_factor()` function*](#21-example-3-to_factor-function) for an example as to using the `to_factor()` function and `labelled` package).
+CES survey dataset files uses either a `.dta()` or `.sav()` file extension, meaning the datasets are loaded into R and RStudio as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to convert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used (see [*2.1 Example 3: `to_factor()` function*](#21-example-3-to_factor-function) for an example as to using the `to_factor()` function and `labelled` package).
 
 #### 2.1 Example 3: `to_factor()` function
 ```
@@ -94,7 +94,7 @@ head(ces2019_web)
 
 
 ## 2.2 Supporting functions
-Along with the main function `get_ces()`, the `cesR` package provides three support functions in `cesR` include `get_cescodes()`, `get_question()` and `get_decon()`. Where `get_cescodes()` and `get_question()` play a directly supportive role to `get_ces()`, `get_decon()` is supportive in that it provides a secondary tool to be used outside the standard use of the `cesR` package and the `get_ces()` function.
+Along with the main function `get_ces()`, the `cesR` package provides three additional functions: `get_cescodes()`, `get_question()` and `get_decon()`. Where `get_cescodes()` and `get_question()` play a directly supportive role to `get_ces()`, `get_decon()` is supportive in that it provides a secondary tool to be used outside the standard use of the `cesR` package and the `get_ces()` function.
 
 ### 2.2.1 get_cescodes()
 The `get_cescodes()` function provides a user a means of looking up the argument calls that are used to access each CES survey dataset. The `get_cescodes()` function does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls. See [*2.2.1 Example 1: `get_cescodes()` function*](#221-example-1-get_cescodes-function) for an example of the print output and the [*3. Vignette*](#3-vignette) section for an example of the function in conjunction with the `get_ces()` function.
@@ -319,18 +319,6 @@ library(dplyr)
 ```
 > devtools::install_github("hodgettsp/cesR")
 Downloading GitHub repo hodgettsp/cesR@HEAD
-These packages have more recent versions available.
-It is recommended to update all of them.
-Which would you like to update?
-
-1: All                          
-2: CRAN packages only           
-3: None                         
-4: cpp11 (0.1.0 -> 0.2.1) [CRAN]
-5: dplyr (1.0.0 -> 1.0.2) [CRAN]
-6: tidyr (1.1.0 -> 1.1.1) [CRAN]
-
-Enter one or more numbers, or an empty line to skip updates:
 ```
 
 Upon installation and loading of the `cesR` package, we can use the `get_cescodes()` function to look up the code for the desired CES survey. In this case that is the 2019 CES phone survey (see [*3.1 Example 2: Lookup CES codes*](#31-example-2-lookup-ces-codes)).
@@ -378,7 +366,7 @@ TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8RHLG1
 ```
 
-To check that the dataset has loaded into RStudio correctly, it is best to check the datset with the `head()` function from the `utils` package (R Core Team, 2020). Unfortunately, the `head()` function does not work with labelled data, so it is best to convert the values to factors using the `to_factor()` function from the `labelled` package (Larmarange, 2020) (see [*3.1 Example 3: Check 2019 CES phone data*](#31-example-3-check-ces-phone-data)).
+To check that the dataset has loaded into RStudio correctly, it is best to check the dataset with the `head()` function from the `utils` package (R Core Team, 2020). Unfortunately, the `head()` function does not work with labelled data, so it is best to convert the values to factors using the `to_factor()` function from the `labelled` package (Larmarange, 2020) (see [*3.1 Example 3: Check 2019 CES phone data*](#31-example-3-check-ces-phone-data)).
 
 #### 3.1 Example 3: Check 2019 CES phone data
 ```
@@ -421,7 +409,7 @@ Male                |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    
 Female              |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1939 |1 [(1) ~  |5 [(5) Q~  |3 [(3) Not ve~ |Notre identité Québécoise|
 
 
-We can see that some of the column names of the subset are not clearly named. The remedy this we can use the `rename` function from the `dplyr` package (Wickham et al., 2020). When using `rename()`, the order goes from new name to old name (see[*3.1 Example 6: Rename colums*](#31-example-6-rename-columns)). To gain an idea of what to rename a column we can use the `get_question()` function to find the associated survey question (see[*3.1 Example 5: `get_question()`*](#31-example-5-get_question)).
+We can see that some of the column names of the subset are not clearly named. The remedy this we can use the `rename` function from the `dplyr` package (Wickham et al., 2020). When using `rename()`, the order goes from new name to old name (see [*3.1 Example 6: Rename columns*](#31-example-6-rename-columns)). To gain an idea of what to rename a column we can use the `get_question()` function to find the associated survey question (see [*3.1 Example 5: `get_question()`*](#31-example-5-get_question)).
 
 #### 3.1 Example 5: `get_question()`
 ```
@@ -441,7 +429,7 @@ On the whole, are you very satisfied, fairly satisfied, not very satisfied
 Most important issue in this FEDERAL election
 ```
 
-Using the labels returned by `get_question()` we can better name the subset columns (see[*3.1 Example 6: Rename colums*](#31-example-6-rename-columns)).
+Using the labels returned by `get_question()` we can better name the subset columns (see [*3.1 Example 6: Rename colums*](#31-example-6-rename-columns)).
 
 #### 3.1 Example 6: Rename columns
 ```
@@ -473,11 +461,11 @@ Lastly, the CES surveys are generally divided into themed sections. A future ste
 
 # References
 
-Belanger, E., & Nadeau, R. (2005). Political trust and the vote in multiparty elections: The Canadian case. *European Journal of Political Resarch*, *44*, 121-146.
+Belanger, E., & Nadeau, R. (2005). Political trust and the vote in multiparty elections: The Canadian case. *European Journal of Political Research*, *44*, 121-146.
 
 Bittner, A. (2018). Leaders always mattered: The persistence of personality in Canadian elections. *Electoral Studies*, *54*, 297-302.  
 
-Canadian Election Study (n.d.). *CES Canadian Election Study EEC Etude electorale canadienne*. Canadian Election Study. http://www.ces-eec.ca/
+Canadian Election Study (2019). *CES Canadian Election Study EEC Etude electorale canadienne*. Canadian Election Study. http://www.ces-eec.ca/
 
 Friendly, M., Dalzell, C.,Monkman, M., & Murphy, D. (2020). Lahman: Sean 'Lahman' Baseball Database. R package
   version 8.0-0. https://CRAN.R-project.org/package=Lahman
