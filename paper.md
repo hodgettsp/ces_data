@@ -333,12 +333,41 @@ Which would you like to update?
 Enter one or more numbers, or an empty line to skip updates:
 ```
 
+Upon installation and loading of the `cesR` package, we can use the `get_cescodes()` function to look up the code for the desired CES survey. In this case that is the 2019 CES phone survey (see [*3.1 Example 2: Lookup CES codes*](#31-example-2-lookup-ces-codes)).
 
-Upon installation and loading of the `cesR` package, use the `get_ces()` function to load in the desired CES survey dataset. In this case that is the CES 2019 phone survey.
+#### 3.1 Example 2: Lookup CES codes
+```
+# look up survey codes
+get_cescodes()
+```
+```
+> get_cescodes()
+   index ces_survey_code get_ces_call_char
+1      1     ces2019_web     "ces2019_web"
+2      2   ces2019_phone   "ces2019_phone"
+3      3     ces2015_web     "ces2015_web"
+4      4   ces2015_phone   "ces2015_phone"
+5      5   ces2015_combo   "ces2015_combo"
+6      6         ces2011         "ces2011"
+7      7         ces2008         "ces2008"
+8      8         ces2004         "ces2004"
+9      9         ces0411         "ces0411"
+10    10         ces0406         "ces0406"
+11    11         ces2000         "ces2000"
+12    12         ces1997         "ces1997"
+13    13         ces1993         "ces1993"
+14    14         ces1988         "ces1988"
+15    15         ces1984         "ces1984"
+16    16         ces1974         "ces1974"
+17    17         ces7480         "ces7480"
+18    18      ces72_jnjl      "ces72_jnjl"
+19    19       ces72_sep       "ces72_sep"
+20    20       ces72_nov       "ces72_nov"
+21    21         ces1968         "ces1968"
+22    22         ces1965         "ces1965"
+```
+In the printed data frame we can see that the argument code for the 2019 CES phone survey is "ces2019_phone" (see [*3.1 Example 2: Lookup CES codes*](#31-example-2-lookup-ces-codes)). Using this code with the `get_ces()` function we can retrieve the 2019 CES phone survey (see [*3.1 Example 3: `get_ces()`*](#31-example-3-get_ces)).
 
-```
-get_ces("ces2019_phone")
-```
 Unfortunately the `head()` function does not work on the labelled dataset format. To check that the dataset has loaded into RStudio correctly, it is best to convert the values to factors.
 
 ```
