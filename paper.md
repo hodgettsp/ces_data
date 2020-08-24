@@ -1,6 +1,6 @@
 # cesR
 
-# Introduction
+# 1. Introduction
 
 *Note: will need to come back to this once the rest of the paper is done.*
 
@@ -12,17 +12,17 @@ The `cesR` package is built using the R programming language and is designed to 
 
 This paper introduces the `cesR` package and its main function `get_ces()`, which is used to create data objects from a called CES survey, as well as the secondary functions `get_cescodes()`, `get_question`, and `get_decon()`. In addition to discussing the construction of each function, examples and vignettes as to common function uses are provided.
 
-# Package Structure
+# 2. Package Structure
 
 The `cesR` package has four functions. These are `get_ces()`, `get_cescodes()`, `get_question()`, and `get_decon()`. The `get_ces()` function provides the main functionality for the `cesR` package, allowing the user to call for a specifc CES survey dataset. Meanwhile, `get_cescodes()` and `get_question()` act in a supportive capacity to `get_ces()` by providing a means for users to lookup CES survey code calls and survey questions associated with a column respectively.  
 
-## Main function
+## 2.1 Main function
 
 When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and url for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download url for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and url of the survey data storage location are printed in the console (see [*Example 1: `get_ces()` basics*](#example-1-get_ces-basics) for an example of a basic `get_ces()` function call).
 
-If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*Example 2: `get_ces()` error*](#example-2-get_ces-error)). 
+If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*2.1. Example 1: `get_ces()` error*](#2-1-example-1-get_ces-error)). 
 
-#### Example 1: `get_ces()` basics
+#### 2.1 Example 1: `get_ces()` basics
 ```
 # install the cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -297,7 +297,7 @@ ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ J
 
 While the `get_decon()` provides a subset of the CES 2019 online survey dataset, the general use of the `cesR` package is to access CES data and the subsetting of any of the CES survey datasets.
 
-The following presents a vignette of calling and producing a subset of the 2019 CES phone survey dataset. This vignette uses functions from the `cesR`, `devtools`, `labelled`, and `dplyr` packages.
+The following presents a vignette of installing `cesR` from its GitHub repository as well as calling and producing a subset of the 2019 CES phone survey dataset. This vignette uses functions from the `cesR`, `devtools`, `labelled`, and `dplyr` packages.
 
 To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is currently only available through the use of the `install_github` function from the `devtools` package (Wickham et al., 2020). During installation, RStudio may request to update other packages. It is best to press enter with an empty line (see [*Example 12: Install `cesR`*](#example-12-install-cesR)).
 
