@@ -20,7 +20,7 @@ The `cesR` package has four functions. These are `get_ces()`, `get_cescodes()`, 
 
 When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and url for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download url for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and url of the survey data storage location are printed in the console (see [*2.1 Example 1: `get_ces()` basics*](#21-example-1-get_ces-basics) for an example of a basic `get_ces()` function call).
 
-If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*2.1. Example 1: `get_ces()` error*](#2-1-example-1-get_ces-error)). 
+If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*2.1. Example 2: `get_ces()` error*](#21-example-2-get_ces-error)). 
 
 #### 2.1 Example 1: `get_ces()` basics
 ```
@@ -39,7 +39,7 @@ TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
 ```
 
-#### Example 2: `get_ces()` error
+#### 2.1 Example 2: `get_ces()` error
 ```
 # install the cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -58,9 +58,9 @@ The character string argument calls for each CES survey are provided in the `get
 
 The structure of `get_ces()` makes it possible to call a CES survey more than once, but doing so will recreate the data object. When `get_ces()` is called, before downloading the requested survey file, `get_ces()` checks if the file already exists in the `inst/extdata` directory. While `get_ces()` is designed to remove the downloaded file, checking if the file already exists alerts the function if something is wrong. By checking if the file exists and not if the data object exists, the `get_ces()` function is able to load the requested dataset more than once, thereby allowing an unmanipulated version of a dataset to be loaded if so required. For example, if a loaded data object becomes corrupted or an unmanipulated version is needed, then using `get_ces()` to call the same CES survey will provide a clean copy.
 
-CES survey dataset files usee ither a `.dta()` or `.sav()` file extension, meaning the datasets are loaded into R and RStudio as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to convert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used (see [*Example 3: `to_factor()` function*](#example-3-to_factor-function) for an example as to using the `to_factor()` function and `labelled` package).
+CES survey dataset files usee ither a `.dta()` or `.sav()` file extension, meaning the datasets are loaded into R and RStudio as the type labelled. The `get_ces()` function does not convert the values of the loaded tables to a factor type so that personal workflow practices are not interfered with. It is suggested that to convert the dataset values to a factor type that the `to_factor()` function from the `labelled` package (Lamarange, 2020) be used (see [*2.1 Example 3: `to_factor()` function*](#21-example-3-to_factor-function) for an example as to using the `to_factor()` function and `labelled` package).
 
-#### Example 3: `to_factor()` function
+#### 2.1 Example 3: `to_factor()` function
 ```
 # install cesR package from GitHub
 devtools::intall_github("hodgettsp/cesR")
@@ -93,13 +93,13 @@ head(ces2019_web)
 2019-09-13 10:10:20 | 2019-09-13 10:29:45 | R_3LiGZcCWJEcWV~ | I consent to~ | Canadian citizen | 1999 | NA | A woman | Ontario| Some university |
 
 
-## Supporting functions
+## 2.2 Supporting functions
 Along with the main function `get_ces()`, the `cesR` package provides three support functions in `cesR` include `get_cescodes()`, `get_question()` and `get_decon()`. Where `get_cescodes()` and `get_question()` play a directly supportive role to `get_ces()`, `get_decon()` is supportive in that it provides a secondary tool to be used outside the standard use of the `cesR` package and the `get_ces()` function.
 
-### get_cescodes()
-The `get_cescodes()` function provides a user a means of looking up the argument calls that are used to access each CES survey dataset. The `get_cescodes()` function does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls. See [*Example 4: `get_cescodes()` function*](#example-4-get_cescodes-function) for an example of the print output and the [*Vignette*](#vignette) section for an example of the function in conjunction with the `get_ces()` function.
+### 2.2.1 get_cescodes()
+The `get_cescodes()` function provides a user a means of looking up the argument calls that are used to access each CES survey dataset. The `get_cescodes()` function does not take any arguments. Instead when the function is called it prints to the console a dataframe that contains the survey codes and their associated argument calls. See [*2.2.1 Example 1: `get_cescodes()` function*](#221-example-1-get_cescodes-function) for an example of the print output and the [*3. Vignette*](#3-vignette) section for an example of the function in conjunction with the `get_ces()` function.
 
-#### Example 4: `get_cescodes()` function
+#### 2.2.1 Example 1: `get_cescodes()` function
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -139,10 +139,10 @@ get_cescodes()
 
 The `get_cescodes()` function works by constructing two vectors, one vector contains the CES survey codes and the other containing the associated survey argument calls. The function then creates dataframes of two vectors using the `data.frame()` function from the `base` package and adds an index number column using the `seq()` function from the `base` package (R Core Team, 2020) by which to merge the dataframes. Using the `merge()` function from the `base` package (R Core Team, 2020), the dataframes are then merged by the index number into a new dataframe. Using the index number ensures the dataframes remain ordered and merge correctly across rows. Column names in the new dataframe are then renamed using the `rename()` function from the `dplyr` package (Wickham et al., 2020) and the vector objects are removed from the environment. The `get_cescodes()` function does not create any variable that is available in the global environment.
 
-### get_question(do, q)
-The `get_question()` provides users with the ability to look up a survey question associated with a given column name. The function takes two arguments in the form of character strings, those being the name of a data object and the name of a column in the given data object. The function works such that it checks whether the given data object exists using the `exists()` function from the `base` package (R Core Team, 2020). If the object does not exist, the function will print out a warning in the console stating `Warning: Data object does not exist` (see [*Example 6: `get_question()` data object error*](#example-6-get_question-data-object-error) for an example of this error). If the object does exist, the `get_question()` will check if the given column name exists in the given data object. This is done using a combination of the `hasName()` function from the `utils` package and the `get()` function from the `base` package (R Core Team, 2020). The `hasName()` function checks if the given column name is in the given data object. Because the arguments are given as character strings the `get()` function is used to return the actual data object instead of the provided character string. Otherwise, the `hasName()` function would only check if the given column name argument occurred in the given character string argument and not the actual data object. If the column does not exist in the data object a warning is printed in the console stating `Warning: Variable is not in dataset`. See [*Example 7: `get_question()` variable error*](#example-7-get_question-variable-error) for an example of this error message. If the given column exists in the given data object, `get_question()` will print the variable label of the given column to the console using a combination of the `var_label()` function from the `labelled` package (Larmarange, 2020) and the `get()` function from the `base` package (R Core Team, 2020). See [*Example 5: `get_question()` basics*](#example-5-get_question-basics) for an example of the general use of the `get_question()` function and the [*Vignette*](#vignette) section for its use in conjunction with the `get_ces()` function.
+### 2.2.2 get_question(do, q)
+The `get_question()` provides users with the ability to look up a survey question associated with a given column name. The function takes two arguments in the form of character strings, those being the name of a data object and the name of a column in the given data object. The function works such that it checks whether the given data object exists using the `exists()` function from the `base` package (R Core Team, 2020). If the object does not exist, the function will print out a warning in the console stating `Warning: Data object does not exist` (see [*2.2.2 Example 1: `get_question()` data object error*](#222-example-1-get_question-data-object-error) for an example of this error). If the object does exist, the `get_question()` will check if the given column name exists in the given data object. This is done using a combination of the `hasName()` function from the `utils` package and the `get()` function from the `base` package (R Core Team, 2020). The `hasName()` function checks if the given column name is in the given data object. Because the arguments are given as character strings the `get()` function is used to return the actual data object instead of the provided character string. Otherwise, the `hasName()` function would only check if the given column name argument occurred in the given character string argument and not the actual data object. If the column does not exist in the data object a warning is printed in the console stating `Warning: Variable is not in dataset`. See [*2.2.2 Example 2: `get_question()` variable error*](#222-example-2-get_question-variable-error) for an example of this error message. If the given column exists in the given data object, `get_question()` will print the variable label of the given column to the console using a combination of the `var_label()` function from the `labelled` package (Larmarange, 2020) and the `get()` function from the `base` package (R Core Team, 2020). See [*2.2.2 Example 3: `get_question()` basics*](#222-example-3-get_question-basics) for an example of the general use of the `get_question()` function and the [*3. Vignette*](#3-vignette) section for its use in conjunction with the `get_ces()` function.
 
-#### Example 5: `get_question()` basics
+#### 2.2.2 Example 1: `get_question()` basics
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -161,7 +161,7 @@ get_question("ces2019_phone", "q11")
 Which party will you likely to vote for
 ```
 
-#### Example 6: `get_question()` data object error
+#### 2.2.2 Example 2: `get_question()` data object error
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -180,7 +180,7 @@ get_question("2019_phone", "q11")
 Warning: Data object does not exist
 ```
 
-#### Example 7: `get_question()` variable error
+#### 2.2.2 Example 3: `get_question()` variable error
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -199,9 +199,9 @@ get_question("ces2019_phone", "11")
 Warning: Variable is not in dataset
 ```
 
-In addition to being usable with the data objects created from the `get_ces()` function, the `get_question()` function is structured in such a way that it can also be used to return the column label for the `decon` dataset or any dataset of the labelled type. [*Example 8: `get_question()` `decon`*](#example-8-get_question-decon) presents an example of the `get_question()` function being used with the `decon` dataset.
+In addition to being usable with the data objects created from the `get_ces()` function, the `get_question()` function is structured in such a way that it can also be used to return the column label for the `decon` dataset or any dataset of the labelled type. [*2.2.2 Example 4: `get_question()` `decon`*](#222-example-4-get_question-decon) presents an example of the `get_question()` function being used with the `decon` dataset.
 
-#### Example 8: `get_question()` `decon`
+#### 2.2.2 Example 4: `get_question()` `decon`
 ```
 # install cesR package from GitHub
 devtools::install_github("hodgettsp/cesR")
@@ -221,10 +221,10 @@ What is the highest level of education that you have completed?
 ```
 
 
-### get_decon()
-When called, creates a subset of the 2019 CES online survey under the name `decon` (demographics and economics) that provides a tool for educators in the teaching of the analysis of large survey datasets. The `get_decon()` function takes no arguments. The function first checks the global environment if an object named `decon` exists using the `exists()` function from the `base` package (R Core Team, 2020). This prevents the `decon` dataset from being recreated if the object exists. If the `get_decon()` function is run when an object with the name `decon` already exists a warning will print in the console stating `Error in get_decon() : Warning: File already exists.` See [*Example 9: `get_decon()` error*](#example-9-get_decon-error) for an example of the error message. If a situation arises in which the `decon` dataset needs to be recreated, then the best course of action is to use the `rm()` function from the `base` package (R Core Team, 2020) to remove the `decon` object and then run the `get_decon()` function again (see [*Example 10: `get_decon()` reload*](#example-10-get_decon-reload)). 
+### 2.2.3 get_decon()
+When called, creates a subset of the 2019 CES online survey under the name `decon` (demographics and economics) that provides a tool for educators in the teaching of the analysis of large survey datasets. The `get_decon()` function takes no arguments. The function first checks the global environment if an object named `decon` exists using the `exists()` function from the `base` package (R Core Team, 2020). This prevents the `decon` dataset from being recreated if the object exists. If the `get_decon()` function is run when an object with the name `decon` already exists a warning will print in the console stating `Error in get_decon() : Warning: File already exists.` See [*2.2.3 Example 1: `get_decon()` error*](#223-example-1-get_decon-error) for an example of the error message. If a situation arises in which the `decon` dataset needs to be recreated, then the best course of action is to use the `rm()` function from the `base` package (R Core Team, 2020) to remove the `decon` object and then run the `get_decon()` function again (see [*2.2.3 Example 2: `get_decon()` reload*](#223-example-2-get_decon-reload)). 
 
-#### Example 9: `get_decon()` error
+#### 2.2.3 Example 1: `get_decon()` error
 ```
 # install cesR package
 devtools::install_github("hodgettsp/cesR")
@@ -243,7 +243,7 @@ get_decon()
 Error in get_decon() : Warning: File already exists.
 ```
 
-#### Example 10: `get_decon()` reload
+#### 2.2.3 Example 2: `get_decon()` reload
 ```
 # install cesR package
 devtools::install_github("hodgettsp/cesR")
@@ -262,10 +262,10 @@ rm(decon)
 get_decon()
 ```
 
-After checking if an object with the name `decon` exists, the `get_decon()` function performs similarly to the `get_ces()` function. It assigns a temporary file extension with a .zip type using the `tempfile()` function from the `base` package, and calls on the url for the 2019 CES online survey and temporarily downloads the associated file using the `download.file()` function from the `base` package (R Core Team, 2020). After unpacking the compressed folder with the `unzip()` function from the `utils` package (R Core Team, 2020), the file is read into R using the `read_dta()` function from the `haven` package (Wickham & Miller, 2020). Using the `select()` function from the `dplyr` package, 20 variables are selected from the main CES 2019 online survey and renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020). The dataframe values are then converted to a factor type using the `to_factor()` function from the `labelled` package (Lamarange, 2020). A new variable, consisting of participants' responses to their self-perceived position on the political spectrum, is then created from two variables using the `unite()` function from the `tidyr` package (Wickham & Henry, 2020) and all empty cells are replaced with `NA` values using the `mutate()` function from the `dplyr` package (Wickham et al., 2020). The dataset is made available in the global environment by using the `assign()` function from the `base` package to create a new data object under the name `decon`. Lastly, the downloaded files are removed from the computer using the `unlink()` function from the `base` package (R Core Team, 2020) and a citation for the 2019 CES online survey and a url to the storage location is printed to the console. See [*Example 11: `get_decon()` basics*](#example-11-get_decon-basics) for an example of a general use of the `get_decon()` function.
+After checking if an object with the name `decon` exists, the `get_decon()` function performs similarly to the `get_ces()` function. It assigns a temporary file extension with a .zip type using the `tempfile()` function from the `base` package, and calls on the url for the 2019 CES online survey and temporarily downloads the associated file using the `download.file()` function from the `base` package (R Core Team, 2020). After unpacking the compressed folder with the `unzip()` function from the `utils` package (R Core Team, 2020), the file is read into R using the `read_dta()` function from the `haven` package (Wickham & Miller, 2020). Using the `select()` function from the `dplyr` package, 20 variables are selected from the main CES 2019 online survey and renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020). The dataframe values are then converted to a factor type using the `to_factor()` function from the `labelled` package (Lamarange, 2020). A new variable, consisting of participants' responses to their self-perceived position on the political spectrum, is then created from two variables using the `unite()` function from the `tidyr` package (Wickham & Henry, 2020) and all empty cells are replaced with `NA` values using the `mutate()` function from the `dplyr` package (Wickham et al., 2020). The dataset is made available in the global environment by using the `assign()` function from the `base` package to create a new data object under the name `decon`. Lastly, the downloaded files are removed from the computer using the `unlink()` function from the `base` package (R Core Team, 2020) and a citation for the 2019 CES online survey and a url to the storage location is printed to the console. See [*2.2.3 Example 3: `get_decon()` basics*](#223-example-3-get_decon-basics) for an example of a general use of the `get_decon()` function.
 
 
-#### Example 11: `get_decon()` basics
+#### 2.2.3 Example 3: `get_decon()` basics
 ```
 # install cesR package
 devtools::install_github("hodgettsp/cesR")
@@ -291,17 +291,17 @@ ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ J
 
 
 
-# Vignette
+# 3. Vignette
 
-## Creating a subset of the CES 2019 phone survey dataset
+## 3.1 Creating a subset of the CES 2019 phone survey dataset
 
 While the `get_decon()` provides a subset of the CES 2019 online survey dataset, the general use of the `cesR` package is to access CES data and the subsetting of any of the CES survey datasets.
 
 The following presents a vignette of installing `cesR` from its GitHub repository as well as calling and producing a subset of the 2019 CES phone survey dataset. This vignette uses functions from the `cesR`, `devtools`, `labelled`, and `dplyr` packages.
 
-To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is currently only available through the use of the `install_github` function from the `devtools` package (Wickham et al., 2020). During installation, RStudio may request to update other packages. It is best to press enter with an empty line (see [*Example 12: Install `cesR`*](#example-12-install-cesR)).
+To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is currently only available through the use of the `install_github` function from the `devtools` package (Wickham et al., 2020). During installation, RStudio may request to update other packages. It is best to press enter with an empty line (see [*3.1 Example 1: Install `cesR`*](#31-example-1-install-cesR)).
 
-#### Example 12: Install `cesR`
+#### 3.1 Example 1: Install `cesR`
 ```
 # uncomment any package that needs to be installed
 # install.packages("devtools")
