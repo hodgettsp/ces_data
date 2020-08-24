@@ -18,7 +18,7 @@ The `cesR` package has four functions. These are `get_ces()`, `get_cescodes()`, 
 
 ## 2.1 Main function
 
-When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and url for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download url for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and url of the survey data storage location are printed in the console (see [*2.1 Example 1: `get_ces()` basics*](#21-example-1-get_ces-basics) for an example of a basic `get_ces()` function call).
+When called, the `get_ces()` function returns a requested CES survey as a data object and prints to the console the associated citation and URL for the survey dataset repository. The function takes one argument in the form of a character string. This argument is a vector member that has been associated with a CES survey through the body of code in the `get_ces()` function that when used calls the download URL for that survey on an associated GitHub repository named `ces_data`. If the provided character string argument matches a member of the built-in vector `ces_codes`, the associated file is downloaded using the `download.file()` function from the `utils` R package (R Core Team, 2020) as a compressed .zip folder and is stored temporarily in `inst/extdata` directory in the greater package directory. Upon downloading the file, the compressed folder is unzipped using the `unzip()` function from the `utils` R package (R Core Team, 2020) and read into R using either the `read_dta()` or `read_sav()` functions from the `haven` R package (Wickham & Miller, 2020) depending on the file extension of the downloaded file. A data frame is then assigned using the `assign()` function  fromt the `base` R package (R Core Team, 2020) as a data object in the global environment. The downloaded file and file directory are then removed from the computer using the `unlink()` function from the `base` R package (R Core Team, 2020). Finally, the recommended citation for the requested survey dataset and URL of the survey data storage location are printed in the console (see [*2.1 Example 1: `get_ces()` basics*](#21-example-1-get_ces-basics) for an example of a basic `get_ces()` function call).
 
 If the provided character string argument does not have a match in the built-in vector, then the function process is stopped and a warning message stating `Error in get_ces(): Warning: Code not in table` is printed in the RStudio console (see [*2.1. Example 2: `get_ces()` error*](#21-example-2-get_ces-error)). 
 
@@ -262,7 +262,7 @@ rm(decon)
 get_decon()
 ```
 
-After checking if an object with the name `decon` exists, the `get_decon()` function performs similarly to the `get_ces()` function. It assigns a temporary file extension with a .zip type using the `tempfile()` function from the `base` package, and calls on the url for the 2019 CES online survey and temporarily downloads the associated file using the `download.file()` function from the `base` package (R Core Team, 2020). After unpacking the compressed folder with the `unzip()` function from the `utils` package (R Core Team, 2020), the file is read into R using the `read_dta()` function from the `haven` package (Wickham & Miller, 2020). Using the `select()` function from the `dplyr` package, 20 variables are selected from the main CES 2019 online survey and renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020). The dataframe values are then converted to a factor type using the `to_factor()` function from the `labelled` package (Lamarange, 2020). A new variable, consisting of participants' responses to their self-perceived position on the political spectrum, is then created from two variables using the `unite()` function from the `tidyr` package (Wickham & Henry, 2020) and all empty cells are replaced with `NA` values using the `mutate()` function from the `dplyr` package (Wickham et al., 2020). The dataset is made available in the global environment by using the `assign()` function from the `base` package to create a new data object under the name `decon`. Lastly, the downloaded files are removed from the computer using the `unlink()` function from the `base` package (R Core Team, 2020) and a citation for the 2019 CES online survey and a url to the storage location is printed to the console. See [*2.2.3 Example 3: `get_decon()` basics*](#223-example-3-get_decon-basics) for an example of a general use of the `get_decon()` function.
+After checking if an object with the name `decon` exists, the `get_decon()` function performs similarly to the `get_ces()` function. It assigns a temporary file extension with a .zip type using the `tempfile()` function from the `base` package, and calls on the URL for the 2019 CES online survey and temporarily downloads the associated file using the `download.file()` function from the `base` package (R Core Team, 2020). After unpacking the compressed folder with the `unzip()` function from the `utils` package (R Core Team, 2020), the file is read into R using the `read_dta()` function from the `haven` package (Wickham & Miller, 2020). Using the `select()` function from the `dplyr` package, 20 variables are selected from the main CES 2019 online survey and renamed using the `rename` function from the `dplyr` package (Wickham et al., 2020). The dataframe values are then converted to a factor type using the `to_factor()` function from the `labelled` package (Lamarange, 2020). A new variable, consisting of participants' responses to their self-perceived position on the political spectrum, is then created from two variables using the `unite()` function from the `tidyr` package (Wickham & Henry, 2020) and all empty cells are replaced with `NA` values using the `mutate()` function from the `dplyr` package (Wickham et al., 2020). The dataset is made available in the global environment by using the `assign()` function from the `base` package to create a new data object under the name `decon`. Lastly, the downloaded files are removed from the computer using the `unlink()` function from the `base` package (R Core Team, 2020) and a citation for the 2019 CES online survey and a URL to the storage location is printed to the console. See [*2.2.3 Example 3: `get_decon()` basics*](#223-example-3-get_decon-basics) for an example of a general use of the `get_decon()` function.
 
 
 #### 2.2.3 Example 3: `get_decon()` basics
@@ -462,18 +462,14 @@ This will have now created a subset of the CES 2019 phone survey with renamed va
 As a final note, it is recommended to download the codebook for a requested survey dataset. These are available from the link printed on a survey call as well as on the package GitHub repository README.
 
 
-# Next steps and cautions
-The `cesR` package is dependent upon the `haven` package (Wickham & Miller, 2020) to be able to read in the CES survey datasets. Thus, changes to the `haven` package may affect the functionality of the `cesR` package.
+# 4. Next steps and cautions
+The `cesR` package is dependent upon the functions from the `haven` (Wickham & Miller, 2020) and `labelled` (Larmarange, 2020) packages to be able to read the CES survey datasets. Thus, changes to the `haven` or `labelled` package may affect the functionality of the `cesR` package. As such, a future consideration would be to move away from this dependency to make the cesR package more independent and self-contained.
 
-Regarding the CES survey datasets, currently the datasets are downloaded from an associated GitHub repository. This means that a dataset will be downloaded as it currently exists on the repository. While these datasets are relatively stable, updates are performed on the datasets to fix incorrect values or mislabelled variables. While the package will be maintained to ensure the most up-to-date survey datasets are included, it may be the case that an update is not immediately performed.
+Regarding the CES survey datasets, currently the datasets are downloaded from an associated GitHub repository. This means that a dataset will be downloaded as it currently exists on that repository. While these datasets are relatively stable (meaning the data is unchanging), updates are performed on the datasets to fix incorrect values or mislabelled variables. While the package will be maintained to ensure the most up-to-date survey datasets are included, it may be the case that an update is not immediately performed on a dataset file. A step to eliminate this possible issue is to link the `get_ces()` call directly to the download URL of the survey as opposed to the current call to the GitHub repository.
 
-One future step to eliminate this possible issue is to link the `get_ces()` call directly to the download url of the survey as opposed to the current call to the GitHub repository.
+The `cesr` package was written to not include datasets so as to minimize its size and speed up install times. However, as the package does need to download files, the speed at which the package functions is dependent upon the speed of a user's internet. This may slow down performance in some cases of poor internet connection.
 
-As the package also downloads files, the speed at which the package functions is dependent upon the speed of the user's broadband.
-
-Lastly, another future step will be to build more subsets of the surveys. Including the division of survey sections into their own subsets, so that topics may be more easily analysed.
-
-*References section not currently in proper APA style; R package references will need to be adjusted to APA*
+Lastly, the CES surveys are generally divided into themed sections. A future step will be to build more subsets of the surveys, including the division of survey sections into their own subsets, so that topics may be more easily analysed.
 
 # References
 
@@ -483,17 +479,17 @@ Bittner, A. (2018). Leaders always mattered: The persistence of personality in C
 
 Canadian Election Study (n.d.). *CES Canadian Election Study EEC Etude electorale canadienne*. Canadian Election Study. http://www.ces-eec.ca/
 
-Michael Friendly, Chris Dalzell, Martin Monkman and Dennis Murphy (2020). Lahman: Sean 'Lahman' Baseball Database. R package
+Friendly, M., Dalzell, C.,Monkman, M., & Murphy, D. (2020). Lahman: Sean 'Lahman' Baseball Database. R package
   version 8.0-0. https://CRAN.R-project.org/package=Lahman
   
-Sharla Gelfand (2020). opendatatoronto: Access the City of Toronto Open Data Portal. R package version 0.1.3.
+Gelfand, S. (2020). opendatatoronto: Access the City of Toronto Open Data Portal. R package version 0.1.3.
   https://CRAN.R-project.org/package=opendatatoronto
 
 Gidengil, E., Blais, A., Nevitte, N., & Nadeau, R. (2001). The correlates and consequences of anti-partyism in the 1997 Canadian election. *Party Politics*, *7*(4), 497-513.
 
-Joseph Larmarange (2020). labelled: Manipulating Labelled Data. R package version 2.5.0. https://CRAN.R-project.org/package=labelled
+Larmarange, J. (2020). labelled: Manipulating Labelled Data. R package version 2.5.0. https://CRAN.R-project.org/package=labelled
 
-Thomas J. Leeper (2017). dataverse: R Client for Dataverse 4. R package version 0.2.0.
+Leeper, T. J. (2017). dataverse: R Client for Dataverse 4. R package version 0.2.0.
 
 Odesi (n.d.) *Scholars Portal*. http://odesi2.scholarsportal.info/webview/ _**(not sure if this citation/reference is correct. need to doublecheck)**_
 
@@ -505,15 +501,15 @@ UBC (n.d.). *Surveys*. Canadian Election Study Etude Electorale Canadienne. http
 
 von Bergmann, J., Dmitry Shkolnik, and Aaron Jacobs (2020). cancensus: R package to access, retrieve, and work with Canadian Census data and geography. v0.3.2.
 
-Hadley Wickham (2020). fueleconomy: EPA Fuel Economy Data. R package version 1.0.0. https://CRAN.R-project.org/package=fueleconomy
+Wickham, H. (2020). fueleconomy: EPA Fuel Economy Data. R package version 1.0.0. https://CRAN.R-project.org/package=fueleconomy
 
-Hadley Wickham, Romain François, Lionel Henry and Kirill Müller (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.0. https://CRAN.R-project.org/package=dplyr
+Wickham, H., François, R., Henry L., & Müller, K. (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.0. https://CRAN.R-project.org/package=dplyr
 
-Hadley Wickham and Lionel Henry (2020). tidyr: Tidy Messy Data. R package version 1.1.0. https://CRAN.R-project.org/package=tidyr
+Wickham, H., & Henry, L. (2020). tidyr: Tidy Messy Data. R package version 1.1.0. https://CRAN.R-project.org/package=tidyr
 
-Hadley Wickham, Jim Hester and Winston Chang (2020). devtools: Tools to Make Developing R Packages Easier. R package version 2.3.1. https://CRAN.R-project.org/package=devtools
+Wickham, H., Hester, J., & Chang, W. (2020). devtools: Tools to Make Developing R Packages Easier. R package version 2.3.1. https://CRAN.R-project.org/package=devtools
 
-Hadley Wickham and Evan Miller (2020). haven: Import and Export 'SPSS', 'Stata' and 'SAS' Files. R package version 2.3.1. https://CRAN.R-project.org/package=haven
+Wickham, H., & Miller, E. (2020). haven: Import and Export 'SPSS', 'Stata' and 'SAS' Files. R package version 2.3.1. https://CRAN.R-project.org/package=haven
 
 Wilkins-Laflamme, S. (2018). Islamaphobia in Canada: Measuring the realities of negative attitudes toward Muslims and religious discrimination. *Canadian Sociological Association*, *55*(1), 86-110.
 
