@@ -297,7 +297,7 @@ ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ J
 
 While the `get_decon()` provides a subset of the CES 2019 online survey dataset, the general use of the `cesR` package is to access CES data and the subsetting of any of the CES survey datasets.
 
-The following presents a vignette of installing `cesR` from its GitHub repository as well as calling and producing a subset of the 2019 CES phone survey dataset. This vignette uses functions from the `cesR`, `devtools`, `labelled`, and `dplyr` packages.
+The following presents a vignette of installing `cesR` from its GitHub repository as well as calling and producing a subset of the 2019 CES phone survey dataset. This vignette uses functions from the `cesR`, `devtools` (Wickham et al., 2020), `labelled` (Larmarange, 2020), `dplyr` (Wickham et al., 2020), and `utils` (R Core Team, 2020) packages.
 
 To begin, install and load the `cesR` package (and all other necessary packages) into RStudio. Currently, this is currently only available through the use of the `install_github` function from the `devtools` package (Wickham et al., 2020). During installation, RStudio may request to update other packages. It is best to press enter with an empty line (see [*3.1 Example 1: Install `cesR`*](#31-example-1-install-cesR)).
 
@@ -366,35 +366,101 @@ get_cescodes()
 21    21         ces1968         "ces1968"
 22    22         ces1965         "ces1965"
 ```
-In the printed data frame we can see that the argument code for the 2019 CES phone survey is "ces2019_phone" (see [*3.1 Example 2: Lookup CES codes*](#31-example-2-lookup-ces-codes)). Using this code with the `get_ces()` function we can retrieve the 2019 CES phone survey (see [*3.1 Example 3: `get_ces()`*](#31-example-3-get_ces)).
-
-Unfortunately the `head()` function does not work on the labelled dataset format. To check that the dataset has loaded into RStudio correctly, it is best to convert the values to factors.
+In the printed data frame we can see that the argument code for the 2019 CES phone survey is "ces2019_phone" (see [*3.1 Example 2: Lookup CES codes*](#31-example-2-lookup-ces-codes)). Using this code with the `get_ces()` function we can retrieve the 2019 CES phone survey (see [*3.1 Example 3: `get_ces()`*](#31-example-3-get_ces)). Additionally, we can see when `get_ces()` is called, the survey citation and link to repository prints to the console.
 
 ```
-ces2019_phone <- labelled::to_factor(ces2019_phone)
+# call 2019 CES phone survey
+get_ces("ces2019_phone")
+```
+```
+TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Phone Survey', https://doi.org/10.7910/DVN/8RHLG1, Harvard Dataverse, V1, UNF:6:eyR28qaoYlHj9qwPWZmmVQ== [fileUNF]
+
+LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8RHLG1
+```
+
+To check that the dataset has loaded into RStudio correctly, it is best to check the datset with the `head()` function from the `utils` package (R Core Team, 2020). Unfortunately, the `head()` function does not work with labelled data, so it is best to convert the values to factors using the `to_factor()` function from the `labelled` package (Larmarange, 2020) (see [*3.1 Example 3: Check 2019 CES phone data*](#31-example-3-check-ces-phone-data)).
+
+#### 3.1 Example 3: Check 2019 CES phone data
+```
+# convert values to factor type
+ces2019_phone <- to_factor(ces2019_phone)
 head(ces2019_phone)
 
 # alternatively the factored table can be assigned to its own data object to leave the original untouched.
 # ces2019_phone_factor <- labelled::to_factor(ces2019_phone)
 # head(ces2019_phone_factor)
 ```
+ sample_id | survey_end_CES | survey_end_mont~ | survey_end_day_~ | num_attempts_CES | interviewer_id_~ | interviewer_gen~ | language_CES | phonetype_CES |
+-----------|----------------|------------------|------------------|------------------|------------------|------------------|--------------|---------------|
+<dbl>      | <chr>          | <dbl>            | <dbl>            |  <dbl>           |  <dbl>           |     <chr>        |    <fct>     | <fct>         |
+18         | 2019-09-23 15~ |               9  |              23  |              5   |         161182   | Female           | (2) French   |  (2) Wireless |
+32         | 2019-09-12 18~ |               9  |              12  |              1   |         151152   | Male             | (1) English  |  (2) Wireless |
+39         | 2019-09-10 18~ |               9  |              10  |              1   |         161182   | Female           | (2) French   |  (2) Wireless |
+59         | 2019-10-10 15~ |              10  |              10  |              6   |         147601   | Female           | (2) French   |  (2) Wireless |
+61         | 2019-09-12 16~ |               9  |              12  |              1   |         151152   | Male             | (2) French   |  (2) Wireless |
+69         | 2019-09-17 17~ |               9  |              17  |              1   |           2503   | Female           | (2) French   |  (2) Wireless |
 
-With the dataset loaded, the `select()` function from the `dplyr` package is an efficient way of selecting the required variable columns. In this case, the language, phone type, weight, citizenship, year of birth, identified gender, province, satisfaction with Canadian democracy, and most important election issue are selected. Furthermore, the columns are not all named in an understandable way and so will be renamed using the `rename()` function from the `dplyr` package. When using `rename()` the order goes from new name/old name. 
 
+With the dataset loaded, the `select()` function from the `dplyr` package (Wickham et al., 2020) is an efficient way of selecting the required variable columns. In this case, the language, phone type, weight, citizenship, year of birth, interviewer gender, identified gender, province, satisfaction with Canadian democracy, and most important election issue are selected using the column index (see [*3.1 Example 4: Select columns*](#31-example-4-select-columns)). Additionally, the columns are not all named in an understandable way and so will be renamed using the `rename()` function from the `dplyr` package (Wickham et al., 2020).  
+
+#### 3.1 Example 4: Select columns
 ```
 ces2019_phone_subset <- ces2019_phone %>% 
-  select(8, 9, 20, 25:30) %>% 
-  rename(citizenship = q1,
-         yob = q2,
-         gender = q3,
-         province = q4,
-         satisfaction = q6,
-         issue_important = q7)
+  select(7, 8, 9, 20, 25:30)
+  
+head(ces2019_phone_subset)
+```
+interviewer_gender~ |  language_CES | phonetype_CES | weight_CES | q1      | q2      | q3       | q4        | q6            | q7     |
+--------------------|---------------|---------------|------------|---------|---------|----------|-----------|---------------|--------|
+ <chr>              |     <dbl+lbl> |   <dbl+lbl>   |   <dbl>    |<dbl+lbl>| <dbl+l> | <dbl+lb> | <dbl+lbl> |  <dbl+lbl>    | <chr>  |
+Female              |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1963 |1 [(1) ~  |5 [(5) Q~  |3 [(3) Not ve~ |economie|
+Male                |1 [(1) Englis~ |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1973 |1 [(1) ~  |5 [(5) Q~  |2 [(2) Fairly~ |Finances|
+Female              |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1994 |1 [(1) ~  |5 [(5) Q~  |1 [(1) Very s~ |agriculture|
+Female              |2 [(2) French] |2 [(2) Wireles~|      1.23  |1 [(1) Y~|    2000 |1 [(1) ~  |5 [(5) Q~  |2 [(2) Fairly~ |l'environnement|
+Male                |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1984 |1 [(1) ~  |5 [(5) Q~  |4 [(4) Not sa~ |Utilisation de la Banque du ~|
+Female              |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1939 |1 [(1) ~  |5 [(5) Q~  |3 [(3) Not ve~ |Notre identité Québécoise|
+
+
+We can see that some of the column names of the subset are not clearly named. The remedy this we can use the `rename` function from the `dplyr` package (Wickham et al., 2020). When using `rename()`, the order goes from new name to old name (see[*3.1 Example 6: Rename colums*](#31-example-6-rename-columns)). To gain an idea of what to rename a column we can use the `get_question()` function to find the associated survey question (see[*3.1 Example 5: `get_question()`*](#31-example-5-get_question)).
+
+#### 3.1 Example 5: `get_question()`
+```
+get_question("ces2019_phone_subset", "q1")
+get_question("ces2019_phone_subset", "q2")
+get_question("ces2019_phone_subset", "q3")
+get_question("ces2019_phone_subset", "q4")
+get_question("ces2019_phone_subset", "q6")
+get_question("ces2019_phone_subset", "q7")
+```
+```
+Are you a Canadian Citizen?
+In what year were you born?
+Gender
+In which province or territory are you currently living?
+On the whole, are you very satisfied, fairly satisfied, not very satisfied
+Most important issue in this FEDERAL election
 ```
 
-This will have now created a subset of the CES 2019 phone survey with renamed variables and factor values. As a final note, it is recommended to download the codebook for a requested survey dataset. These are available from the link printed on a survey call as well as on the package GitHub repository README.
+Using the labels returned by `get_question()` we can better name the subset columns (see[*3.1 Example 6: Rename colums*](#31-example-6-rename-columns)).
 
-*Need to add another vignette, could use get_cescodes and get_question, or an example using get_decon*
+#### 3.1 Example 6: Rename columns
+```
+ces2019_phone_subset <- ces_phone_subset %>% 
+  rename(interviewer_gender = interviewer_gender_CES,
+         language = language_CES,
+         phonetype = phonetype_CES,
+         weight = weight_CES,
+         citizenship = q1,
+         yob = q2,
+         respondent_gender = q3,
+         province_territory = q4,
+         dmcrcy_satisfaction = q6,
+         imprtnt_issue = q7)
+```
+This will have now created a subset of the CES 2019 phone survey with renamed variables and factor values.
+
+As a final note, it is recommended to download the codebook for a requested survey dataset. These are available from the link printed on a survey call as well as on the package GitHub repository README.
+
 
 # Next steps and cautions
 The `cesR` package is dependent upon the `haven` package (Wickham & Miller, 2020) to be able to read in the CES survey datasets. Thus, changes to the `haven` package may affect the functionality of the `cesR` package.
