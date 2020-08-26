@@ -412,17 +412,17 @@ In the printed data frame we can see that the argument code for the 2019 CES pho
 # get preview of first 8 rows of 2019 CES phone survey dataset
 get_preview("ces2019_phone", 8)
 ```
-  sample_id | survey_end_CES | survey_end_mont~ | survey_end_day_~ | num_attempts_CES | interviewer_id_~ | interviewer_gen~ | language_CES | phonetype_CES |
+  sample_id  | survey_end_CES | survey_end_mont~ | survey_end_day_~ | num_attempts_CES | interviewer_id_~ | interviewer_gen~ | language_CES | phonetype_CES |
   ----------|----------------|------------------|------------------|------------------|------------------|------------------|--------------|---------------|
-      <dbl> | <chr>          |            <dbl> |            <dbl> |            <dbl> |            <dbl> | <chr>            |<fct>         |<fct>          |
-        18  | 2019-09-23 15~ |                9 |              23  |               5  |         161182   | Female           |(2) French    |(2) Wireless   | 
-        32  | 2019-09-12 18~ |                9 |              12  |               1  |         151152   | Male             |(1) English   |(2) Wireless   |
-        39  | 2019-09-10 18~ |                9 |              10  |               1  |         161182   | Female           |(2) French    |(2) Wireless   | 
-        59  | 2019-10-10 15~ |               10 |              10  |               6  |         147601   | Female           |(2) French    |(2) Wireless   |
-        61  | 2019-09-12 16~ |                9 |              12  |               1  |         151152   | Male             |(2) French    |(2) Wireless   | 
-        69  | 2019-09-17 17~ |                9 |              17  |               1  |           2503   | Female           |(2) French    |(2) Wireless   |
-       157  | 2019-09-12 16~ |                9 |              12  |               1  |           2529   | Male             |(2) French    |(2) Wireless   |
-       158  | 2019-09-14 10~ |                9 |              14  |               4  |         142515   | Male             |(2) French    |(2) Wireless   |
+      <dbl> | <chr>          |            <dbl> |            <dbl> |            <dbl> |            <dbl> | <chr>            |<fct>         |<fct>         |
+        18  | 2019-09-23 15~ |                9 |              23  |               5  |         161182   | Female           |(2) French    |(2) Wireless  | 
+        32  | 2019-09-12 18~ |                9 |              12  |               1  |         151152   | Male             |(1) English   |(2) Wireless  |
+        39  | 2019-09-10 18~ |                9 |              10  |               1  |         161182   | Female           |(2) French    |(2) Wireless  | 
+        59  | 2019-10-10 15~ |               10 |              10  |               6  |         147601   | Female           |(2) French    |(2) Wireless  |
+        61  | 2019-09-12 16~ |                9 |              12  |               1  |         151152   | Male             |(2) French    |(2) Wireless  | 
+        69  | 2019-09-17 17~ |                9 |              17  |               1  |           2503   | Female           |(2) French    |(2) Wireless  |
+       157  | 2019-09-12 16~ |                9 |              12  |               1  |           2529   | Male             |(2) French    |(2) Wireless  |
+       158  | 2019-09-14 10~ |                9 |              14  |               4  |         142515   | Male             |(2) French    |(2) Wireless  |
 
 
 
