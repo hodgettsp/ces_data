@@ -420,8 +420,7 @@ get_preview("ces2019_phone", 8)
 39         | 2019-09-10 18~ |               9  |              10  |              1   |         161182   | Female           | (2) French   |  (2) Wireless |
 59         | 2019-10-10 15~ |              10  |              10  |              6   |         147601   | Female           | (2) French   |  (2) Wireless |
 61         | 2019-09-12 16~ |               9  |              12  |              1   |         151152   | Male             | (2) French   |  (2) Wireless |
-69         | 2019-09-17 17~ |               9  |              17  |              1   |           2503   | Female           | (2) French   |  (2) Wireless |       157   | 2019-09-12 16~ |                9 |              12  |               1  |           2529   | Male             |  (2) French  | (2) Wireless   |
-       158   | 2019-09-14 10~ |                9 |              14  |               4  |         142515   | Male             |  (2) French  | (2) Wireless   |
+69         | 2019-09-17 17~ |               9  |              17  |              1   |           2503   | Female           | (2) French   |  (2) Wireless |       157   | 2019-09-12 16~ |                9 |              12  |               1  |           2529   | Male             |  (2) French  | (2) Wireless   | 158   | 2019-09-14 10~ |                9 |              14  |               4  |         142515   | Male             |  (2) French  | (2) Wireless   |
 
 
 Using the same survey code arguemtn with the `get_ces()` function we can retrieve the complete 2019 CES phone survey (see [*3.1.4: `get_ces()`*](#314-get_ces)). Additionally, we can see when `get_ces()` is called, the survey citation and link to repository prints to the console.
