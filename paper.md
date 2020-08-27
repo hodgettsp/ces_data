@@ -533,43 +533,41 @@ Lastly, the CES surveys are generally divided into themed sections. A future ste
 
 # References
 
-Belanger, E., & Nadeau, R. (2005). Political trust and the vote in multiparty elections: The Canadian case. *European Journal of Political Research*, *44*, 121-146.
+Belanger, E. and Nadeau, R. (2005). Political trust and the vote in multiparty elections: The Canadian case. European Journal of Political Research, 44(1):121–146.
 
-Bittner, A. (2018). Leaders always mattered: The persistence of personality in Canadian elections. *Electoral Studies*, *54*, 297-302.  
+Bittner, A. (2018). Leaders always mattered: The persistence of personality in canadian elections. Electoral Studies, 54:297–302.
 
-Canadian Election Study (2019). *CES Canadian Election Study EEC Etude electorale canadienne*. Canadian Election Study. http://www.ces-eec.ca/
+Canadian Election Study (2019). Welcome to the 2019 Canadian Election Study. http://www.ces-eec.ca/.
 
-Friendly, M., Dalzell, C.,Monkman, M., & Murphy, D. (2020). Lahman: Sean 'Lahman' Baseball Database. R package
-  version 8.0-0. https://CRAN.R-project.org/package=Lahman
-  
+Friendly, M., Dalzell, C., Monkman, M., and Murphy, D. (2020). Lahman: Sean ’Lahman’ Baseball Database. R package version 8.0-0.
+
 Gelfand, S. (2020). opendatatoronto: Access the City of Toronto Open Data Portal. R package version 0.1.3.
-  https://CRAN.R-project.org/package=opendatatoronto
 
-Gidengil, E., Blais, A., Nevitte, N., & Nadeau, R. (2001). The correlates and consequences of anti-partyism in the 1997 Canadian election. *Party Politics*, *7*(4), 497-513.
+Gidengil, E., Blais, A., Nevitte, N., and Nadeau, R. (2001). The correlates and consequences of anti-partyism in the 1997 canadian election. Party Politics, 7(4):491–513.
 
-Larmarange, J. (2020). labelled: Manipulating Labelled Data. R package version 2.5.0. https://CRAN.R-project.org/package=labelled
+Larmarange, J. (2020). labelled: Manipulating Labelled Data. R package version 2.5.0.
 
 Leeper, T. J. (2017). dataverse: R Client for Dataverse 4. R package version 0.2.0.
 
-Odesi (n.d.) *Scholars Portal*. http://odesi2.scholarsportal.info/webview/ _**(not sure if this citation/reference is correct. need to doublecheck)**_
+ODESI (2020). ODESI. https://search1.odesi.ca/#/.
 
-R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL https://www.R-project.org/.
+R Core Team (2020). R: A Language and Environment for Statistical Computing. R Foundation for Statistical Computing, Vienna, Austria.
 
-RStudio Team (2020). RStudio: Integrated Development Environment for R. RStudio, PBC, Boston, MA URL http://www.rstudio.com/.
+RStudio Team (2020). RStudio: Integrated Development Environment for R. RStudio, PBC, Boston, MA.
 
-UBC (n.d.). *Surveys*. Canadian Election Study Etude Electorale Canadienne. https://ces-eec.arts.ubc.ca/english-section/surveys/
+UBC (2015). Canadian Election Study | Étude électorale canadienne. https://ces-eec.arts.ubc.ca/english-section/surveys/.
 
-von Bergmann, J., Dmitry Shkolnik, and Aaron Jacobs (2020). cancensus: R package to access, retrieve, and work with Canadian Census data and geography. v0.3.2.
+von Bergmann, J., Shkolnik, D., and Jacobs, A. (2020). cancensus: R package to access, retrieve, and work with Canadian Census data and geography. R package version 0.3.2.
 
-Wickham, H. (2020). fueleconomy: EPA Fuel Economy Data. R package version 1.0.0. https://CRAN.R-project.org/package=fueleconomy
+Wickham’, H. (2014). nasaweather: Collection of datasets from the ASA 2006 data expo. R package version 0.1.
+Wickham, H. (2020). fueleconomy: EPA Fuel Economy Data. R package version 1.0.0.
 
-Wickham, H., François, R., Henry L., & Müller, K. (2020). dplyr: A Grammar of Data Manipulation. R package version 1.0.0. https://CRAN.R-project.org/package=dplyr
+Wickham, H., François, R., Henry, L., and Müller, K. (2020a). dplyr: A Grammar of Data Manipulation. R package version 1.0.0.
 
-Wickham, H., & Henry, L. (2020). tidyr: Tidy Messy Data. R package version 1.1.0. https://CRAN.R-project.org/package=tidyr
+Wickham, H. and Henry, L. (2020). tidyr: Tidy Messy Data. R package version 1.1.0.
 
-Wickham, H., Hester, J., & Chang, W. (2020). devtools: Tools to Make Developing R Packages Easier. R package version 2.3.1. https://CRAN.R-project.org/package=devtools
+Wickham, H., Hester, J., and Chang, W. (2020b). devtools: Tools to Make Developing R Packages Easier. R package version 2.3.1.
 
-Wickham, H., & Miller, E. (2020). haven: Import and Export 'SPSS', 'Stata' and 'SAS' Files. R package version 2.3.1. https://CRAN.R-project.org/package=haven
+Wickham, H. and Miller, E. (2020). haven: Import and Export ’SPSS’, ’Stata’ and ’SAS’ Files. R package version 2.3.1.
 
-Wilkins-Laflamme, S. (2018). Islamaphobia in Canada: Measuring the realities of negative attitudes toward Muslims and religious discrimination. *Canadian Sociological Association*, *55*(1), 86-110.
-
+Wilkins-Laflamme, S. (2018). Islamophobia in canada: Measuring the realities of negative attitudes toward muslims and religious discrimination. Canadian Review of Sociology/Revue canadienne de sociologie, 55(1):86–110.
