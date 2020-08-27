@@ -9,7 +9,7 @@ output:
 title: "`cesR`: A package to make using the Canadian Election Study a little easier"
 thanks: "We thank **THANKS**.  Our code and datasets are available at: **LINK**. Comments on the `r format(Sys.time(), '%d %B %Y')` version of this paper are welcome at: rohan.alexander@utoronto.ca. For the latest version please click [here](LINK)."
 author:
-- Paul Hodgetts, University of Toronto
+- Paul A. Hodgetts, University of Toronto
 - Rohan Alexander, University of Toronto
 abstract: "TBD"
 keywords: "TBD"
@@ -28,9 +28,9 @@ knitr::opts_chunk$set(echo = TRUE)
 
 An election season brings with it a stream of predictions made using a variety of resources and methods. While election predictions can provide insight as to the direction of an election and voter intention during an election, a retrospective on an election can be equally enlightening. Survey data of this sort can provide a better understanding of an election after-the-fact and can provide clarity as to the changes in the political climate over the years. The Canadian Election Study (CES) is a series of large-scale surveys conducted every election year that seeks to provide such a retrospective understanding to Canadian elections. By providing data on Canadian elections since 1965 up to, most recently, 2019 the CES provides insight into such topics as the intentions of voters, what issues voters deem important, and the perception of parties and candidates [@ces2019]. For example, @bittner2018leaders used CES data to assess the level of presidentialization experienced in Canadian elections over time; while other studies have used CES data to assess the level of Islamophobia in Canada [@wilkins2018islamophobia], how anti-party rhetoric affects voter behaviour [@gidengil2001correlates], and how political trust influences voter behaviour [@BelangerNadeau2005]. The collection of and access to such data is integral to this research. The R package `cesR` ('caesar'), as presented in this paper, seeks to complement the work of the CES, and enhance social science research and the teaching of statistical processes using survey data by providing a means for R users to easily access CES survey datasets.
 
-The CES survey datasets are publicly available from various repositories across the internet in various data types ([@ces2019]; [@ubc]; [@odesi]). As the ability to find and access data is integral to quality research in any domain, the `cesR` package brings together these various sources, providing R users with a means of easily accessing each CES survey dataset while also circumventing the need to download and store survey data files. The structure of `cesR` also removes the need to call a data file from a directory, thereby making it easier to work with CES datasets between different workstations. Additionally, `cesR` provides a function, `get_decon()`, that creates a subset of the 2019 CES online survey that has been prepared in an opinionated way. This subset of the 2019 CES online survey provides a tool for educators that can be used to aid in the teaching of statistical analysis of large survey datasets.
+The CES survey datasets are publicly available from various repositories across the internet in various data types [@ces2019; @ubc; @odesi]. As the ability to find and access data is integral to quality research in any domain, the `cesR` package brings together these various sources, providing R users with a means of easily accessing each CES survey dataset while also circumventing the need to download and store survey data files. The structure of `cesR` also removes the need to call a data file from a directory, thereby making it easier to work with CES datasets between different workstations. Additionally, `cesR` provides a function, `get_decon()`, that creates a subset of the 2019 CES online survey that has been prepared in an opinionated way. This subset of the 2019 CES online survey provides a tool for educators that can be used to aid in the teaching of statistical analysis of large survey datasets.
 
-The `cesR` package is built using the R programming language and is designed to work within the R integrated development environment (IDE) RStudio ([@citeR]; [@citeRStudio]). Providing access to data is common in R packages and the `cesR` package follows and was inspired by the work being done in the R community through such packages as the `opendatatoronto` package [@citeopendatatoronto], the `Lahman` package [@citeLahman], `fueleconomy` [@citefuel], and `nasaweather` [@citenasa]. Furthermore, the `cesR` package is complementary to packages such as `dataverse` [@citedataverse] and `cancensus` [@citecancensus] that provide R users access to Canadian survey and census data. Packages such as these are important to R users as they improve the functionality of working within R by minimizing the number of steps required to load data and increasing the availability of data to R users. The `cesR` package contributes to this area of R package development and the utility of R by providing access to CES survey data while also providing a tool for educators. 
+The `cesR` package is built using the R programming language and is designed to work within the R integrated development environment (IDE) RStudio [@citeR; @citeRStudio]. Providing access to data is common in R packages and the `cesR` package follows and was inspired by the work being done in the R community through such packages as the `opendatatoronto` package [@citeopendatatoronto], the `Lahman` package [@citeLahman], `fueleconomy` [@citefuel], and `nasaweather` [@citenasa]. Furthermore, the `cesR` package is complementary to packages such as `dataverse` [@citedataverse] and `cancensus` [@citecancensus] that provide R users access to Canadian survey and census data. Packages such as these are important to R users as they improve the functionality of working within R by minimizing the number of steps required to load data and increasing the availability of data to R users. The `cesR` package contributes to this area of R package development and the utility of R by providing access to CES survey data while also providing a tool for educators. 
 
 This paper introduces the `cesR` package and its functions [`get_ces()`](#21-get_ces), [`get_cescodes()`](#22-get_cescodes), [`get_question()`](#23-get_question), [`get_preview()`](#24-get_preview), and [`get_decon()`](#25-get_decon). In addition to discussing the construction of each function, examples and vignettes as to common use-cases are provided.
 
@@ -56,7 +56,9 @@ library(cesR)
 get_ces("ces2019_web")
 ```
 ```
-TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
+TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; 
+Loewen, Peter John, 2020, '2019 Canadian Election Study - 
+Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
 
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
 ```
@@ -103,17 +105,18 @@ get_ces("ces2019_web")
 # check column heads for dataframe
 ces2019_web <- to_factor(ces2019_web)
 head(ces2019_web)
-```
- cps19_StartDate | cps19_EndDate | cps19_ResponseId | cps19_consent | cps19_citizensh~ | cps19_yob | cps19_yob_2001_~ | cps19_gender | cps19_province | cps19_eduction |
------------------|---------------|------------------|---------------|------------------|-----------|------------------|--------------|----------------|----------------|
-<dttm> | <dttm> | <chr> | <fct> | <fct> | <fct> | <fct> | <fct> | <fct> | <fct> |
-2019-09-13 08:09:44 | 2019-09-13 08:36:19 | R_1OpYXEFGzHRUp~ | I consent to~ | Canadian citizen | 1989 | NA | A woman | Quebec | Master's degree |
-2019-09-13 08:39:09 | 2019-09-13 08:57:06 | R_2qdrL3J618rxY~ | I consent to~ | Canadian citizen | 1998 | NA | A woman | Quebec | Master's degree |
-2019-09-13 10:01:19 | 2019-09-13 10:27:29 | R_USWDAPcQEQiMm~ | I consent to~ | Canadian citizen | 2000 | NA | A woman | Ontario| Some university |
-2019-09-13 10:05:37 | 2019-09-13 10:50:53 | R_3IQaeDXy0tBzE~ | I consent to~ | Canadian citizen | 1998 | NA | A man   | Ontario| Some university |
-2019-09-13 10:05:52 | 2019-09-13 10:32:53 | R_27WeMQ1asip2c~ | I consent to~ | Canadian citizen | 2000 | NA | A woman | Ontario| Completed seco~ |
-2019-09-13 10:10:20 | 2019-09-13 10:29:45 | R_3LiGZcCWJEcWV~ | I consent to~ | Canadian citizen | 1999 | NA | A woman | Ontario| Some university |
 
+>head(ces2019_web)
+# A tibble: 6 x 620
+  cps19_StartDate     cps19_EndDate       cps19_ResponseId cps19_consent cps19_citizensh~ 
+  <dttm>              <dttm>              <chr>            <fct>         <fct>               
+1 2019-09-13 08:09:44 2019-09-13 08:36:19 R_1OpYXEFGzHRUp~ I consent to~ Canadian citizen      
+2 2019-09-13 08:39:09 2019-09-13 08:57:06 R_2qdrL3J618rxY~ I consent to~ Canadian citizen      
+3 2019-09-13 10:01:19 2019-09-13 10:27:29 R_USWDAPcQEQiMm~ I consent to~ Canadian citizen      
+4 2019-09-13 10:05:37 2019-09-13 10:50:53 R_3IQaeDXy0tBzE~ I consent to~ Canadian citizen        
+5 2019-09-13 10:05:52 2019-09-13 10:32:53 R_27WeMQ1asip2c~ I consent to~ Canadian citizen      
+6 2019-09-13 10:10:20 2019-09-13 10:29:45 R_3LiGZcCWJEcWV~ I consent to~ Canadian citizen 
+```
 
 ## `get_cescodes()`
 
@@ -256,20 +259,6 @@ library(cesR)
 # get preview for 2019 CES online survey for 10 rows
 get_preview("ces2019_web", 10)
 ```
-cps19_StartDate | cps19_EndDate | cps19_ResponseId | cps19_consent | cps19_citizensh~ | cps19_yob | cps19_yob_2001_~ | cps19_gender | cps19_province | cps19_eduction | cps19_demsat | cps19_imp_iss   |
-----------------|---------------|------------------|---------------|------------------|-----------|------------------|--------------|----------------|----------------|--------------|-----|
-<dttm>          |    <dttm>     |         <chr>    |         <fct> |         <fct>    |   <fct>   |  <fct>           |  <fct>       | <fct>          | <fct>          |  <fct>       |
-<chr>           |
-2019-09-13 08:09:44 | 2019-09-13 08:36:19 | R_1OpYXEFGzHRUp~ | I consent to~ | Canadian citizen | 1989 | NA | A woman | Quebec | Master's degree | Fairly sati~ | environnement |
-2019-09-13 08:39:09 | 2019-09-13 08:57:06 | R_2qdrL3J618rxY~ | I consent to~ | Canadian citizen | 1998 | NA | A woman | Quebec | Master's degree | Don't know/~ | NA |
-2019-09-13 10:01:19 | 2019-09-13 10:27:29 | R_USWDAPcQEQiMm~ | I consent to~ | Canadian citizen | 2000 | NA | A woman | Ontario| Some university | Fairly sati~ | NA |
-2019-09-13 10:05:37 | 2019-09-13 10:50:53 | R_3IQaeDXy0tBzE~ | I consent to~ | Canadian citizen | 1998 | NA | A man   | Ontario| Some university | Fairly sati~ | NA |
-2019-09-13 10:05:52 | 2019-09-13 10:32:53 | R_27WeMQ1asip2c~ | I consent to~ | Canadian citizen | 2000 | NA | A woman | Ontario| Completed seco~ | Fairly sati~ | NA |
-2019-09-13 10:10:20 | 2019-09-13 10:29:45 | R_3LiGZcCWJEcWV~ | I consent to~ | Canadian citizen | 1999 | NA | A woman | Ontario| Some university | Fairly sati~ | NA |
-2019-09-13 10:14:47 | 2019-09-13 10:32:32 | R_1Iu8R1UlYzVMy~ | I consent to~ | Permanent resid~ | 1998 | NA | A woman | Ontario| Completed seco~ | Fairly sati~ | NA |           
-2019-09-13 10:15:39 | 2019-09-13 10:30:59 | R_2EcS26hqrcVYl~ | I consent to~ | Canadian citizen | 1998 | NA | A woman | Ontario| Some university | Fairly sati~ | NA |           
-2019-09-13 10:15:48 | 2019-09-13 10:37:45 | R_3yrt44wqQ1d4V~ | I consent to~ | Canadian citizen | 1998 | NA | A woman | Ontario| Some university | Fairly sati~ | NA |           
-2019-09-13 10:16:08 | 2019-09-13 10:40:14 | R_10OBmXJyvn8fe~ | I consent to~ | Canadian citizen | 2000 | NA | A man   | Ontario| Completed seco~ | Fairly sati~ | NA | 
 
 ### `get_preview()` no value provided
 ```
@@ -282,16 +271,14 @@ library(cesR)
 # get preview for 2019 CES online survey
 get_preview("ces2019_web")
 ```
-cps19_StartDate | cps19_EndDate | cps19_ResponseId | cps19_consent | cps19_citizensh~ | cps19_yob | cps19_yob_2001_~ | cps19_gender | cps19_province | cps19_eduction | cps19_demsat | cps19_imp_iss   |
-----------------|---------------|------------------|---------------|------------------|-----------|------------------|--------------|----------------|----------------|--------------|-----|
-<dttm>          |    <dttm>     |         <chr>    |         <fct> |         <fct>    |   <fct>   |  <fct>           |  <fct>       | <fct>          | <fct>          |  <fct>       |
-<chr>           |
-2019-09-13 08:09:44 | 2019-09-13 08:36:19 | R_1OpYXEFGzHRUp~ | I consent to~ | Canadian citizen | 1989 | NA | A woman | Quebec | Master's degree | Fairly sati~ | environnement |
-2019-09-13 08:39:09 | 2019-09-13 08:57:06 | R_2qdrL3J618rxY~ | I consent to~ | Canadian citizen | 1998 | NA | A woman | Quebec | Master's degree | Don't know/~ | NA |
-2019-09-13 10:01:19 | 2019-09-13 10:27:29 | R_USWDAPcQEQiMm~ | I consent to~ | Canadian citizen | 2000 | NA | A woman | Ontario| Some university | Fairly sati~ | NA |
-2019-09-13 10:05:37 | 2019-09-13 10:50:53 | R_3IQaeDXy0tBzE~ | I consent to~ | Canadian citizen | 1998 | NA | A man   | Ontario| Some university | Fairly sati~ | NA |
-2019-09-13 10:05:52 | 2019-09-13 10:32:53 | R_27WeMQ1asip2c~ | I consent to~ | Canadian citizen | 2000 | NA | A woman | Ontario| Completed seco~ | Fairly sati~ | NA |
-2019-09-13 10:10:20 | 2019-09-13 10:29:45 | R_3LiGZcCWJEcWV~ | I consent to~ | Canadian citizen | 1999 | NA | A woman | Ontario| Some university | Fairly sati~ | NA |
+cps19_StartDate | cps19_EndDate | cps19_ResponseId | cps19_consent | cps19_citizensh~ |
+-----|-----|-------|----|-----|
+2019-09-13 08:09:44 | 2019-09-13 08:36:19 | R_1OpYXEFGzHRUp~ | I consent to~ | Canadian citizen |
+2019-09-13 08:39:09 | 2019-09-13 08:57:06 | R_2qdrL3J618rxY~ | I consent to~ | Canadian citizen |
+2019-09-13 10:01:19 | 2019-09-13 10:27:29 | R_USWDAPcQEQiMm~ | I consent to~ | Canadian citizen |
+2019-09-13 10:05:37 | 2019-09-13 10:50:53 | R_3IQaeDXy0tBzE~ | I consent to~ | Canadian citizen |
+2019-09-13 10:05:52 | 2019-09-13 10:32:53 | R_27WeMQ1asip2c~ | I consent to~ | Canadian citizen |
+2019-09-13 10:10:20 | 2019-09-13 10:29:45 | R_3LiGZcCWJEcWV~ | I consent to~ | Canadian citizen |
 
 In the initial argument classifications for the `get_preview()` function the variable `x` is set to equal six. This sets a default value for the number of rows to be returned if this value is left empty while allowing the value to be overwritten if provided a value. Like the [`get_ces()` function](#21-get_ces), the `get_preview()` function checks if a file exists in the cesR directory before downloading the requested survey data file associated with the given character string argument. If the file does not already exist, the survey data file is downloaded using the `download.file()` function from the `base` package to a temporary directory set using the `tempfile()` function also from the `base` package [@citeR]. The downloaded file is then unzipped into the `cesR` package directory using the `unzip()` function from the `utils` package [@citeR]. The extracted survey data file is read into R within the `get_preview()` function using either the `read_dta()` or `read_sav()` functions from the `haven` package depending upon the file extension [@citehaven]. The `get_preview()` function then creates a truncated version of the requested dataset by converting the dataset values to a factor type using the `to_factor()` function from the `labelled` package [@citelabelled] and truncating the dataset using the `head()` function from the `utils` package [@citeR] by the numeric value provided by the argument `x`. This dataset is assigned as a variable with the suffix `_preview` to the global environment using the `assign()` function from the `base` package [@citeR]. The function then removes the downloaded files using the `unlink()` function from the `base` package and removes the local variable holding the full dataset using the `rm()` function also from the `base` package [@citeR]. See [3. Vignette](#3-vignette) for a use of the `get_preview()` function in conjunction with the other `cesR` functions.  
 
@@ -354,18 +341,23 @@ get_decon()
 head(decon)
 ```
 ```
-TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
+TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; 
+Loewen, Peter John, 2020, '2019 Canadian Election Study - Online Survey', 
+https://doi.org/10.7910/DVN/DUS88V, Harvard Dataverse, V1
 
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/DUS88V
 ```
-
- ces_code | citizenship | yob | gender | province_territory | education | lr | lr_bef | lr_aft | regligion | sexuality_select | sexuality_text | language_eng | language_fr | langauge_abgi | employment | income | income_cat| marital | econ_retro | econ_fed | econ_self |
-----------|-------------|-----|--------|--------------------|-----------|----|--------|--------|-----------|------------------|----------------|--------------|-------------|---------------|------------|--------|-----------|----------|------------|----------|-----------|
-ces2019_web|Canadian citizen|1989|A woman|Quebec|Master's degree|2|NA|2|Don't know/ Prefer not to answer|Prefer not to say|NA|NA|NA|NA|Don't know/ Prefer not to answer|NA|Don't know/ Prefer not to answer|Don't know/ Prefer not to answer|Stayed about the same|Don't know/ Prefer not to answer|Don't know/ Prefer not to answer|
-ces2019_web|Canadian citizen|1998|A woman|Quebec|Master's degree|2|NA|2|Catholic/ Roman Catholic/ RC|Prefer not to say|NA|English|French|NA|Student and working for pay|NA|Don't know/ Prefer not to answer|Living with a partner|Stayed about the same|Not made much difference|Not made much difference|
-ces2019_web|Canadian citizen|1998|A man|Ontario|Some university|7|7|NA|Jewish/ Judaism/ Jewish Orthodox|Heterosexual|NA|English|NA|NA|Student and working for pay|NA|$110,001 to $150,000|Never Married|Got worse|Worse|Not made much difference
-
-
+```
+# A tibble: 6 x 22
+  ces_code citizenship yob   gender province_territ~ education lr    lr_bef lr_aft religion 
+  <chr>    <fct>       <fct> <fct>  <fct>            <fct>     <chr> <chr>  <chr>  <fct>           
+1 ces2019~ Canadian c~ 1989  A wom~ Quebec           Master's~ 2     NA     2      Don't k~           
+2 ces2019~ Canadian c~ 1998  A wom~ Quebec           Master's~ 2     NA     2      Catholi~      
+3 ces2019~ Canadian c~ 2000  A wom~ Ontario          Some uni~ 4     4      NA     Catholi~      
+4 ces2019~ Canadian c~ 1998  A man  Ontario          Some uni~ 7     7      NA     Jewish/~      
+5 ces2019~ Canadian c~ 2000  A wom~ Ontario          Complete~ 4     4      NA     Catholi~      
+6 ces2019~ Canadian c~ 1999  A wom~ Ontario          Some uni~ 4     4      NA     Catholi~ 
+```
 
 # Vignette
 
@@ -437,17 +429,17 @@ In the printed data frame we can see that the argument code for the 2019 CES pho
 # get preview of first 8 rows of 2019 CES phone survey dataset
 get_preview("ces2019_phone", 8)
 ```
- sample_id | survey_end_CES | survey_end_mont~ | survey_end_day_~ | num_attempts_CES | interviewer_id_~ | interviewer_gen~ | language_CES | phonetype_CES |
------------|----------------|------------------|------------------|------------------|------------------|------------------|--------------|---------------|
-<dbl>      | <chr>          | <dbl>            | <dbl>            |  <dbl>           |  <dbl>           |     <chr>        |    <fct>     | <fct>         |
-18         | 2019-09-23 15~ |               9  |              23  |              5   |         161182   | Female           | (2) French   |  (2) Wireless |
-32         | 2019-09-12 18~ |               9  |              12  |              1   |         151152   | Male             | (1) English  |  (2) Wireless |
-39         | 2019-09-10 18~ |               9  |              10  |              1   |         161182   | Female           | (2) French   |  (2) Wireless |
-59         | 2019-10-10 15~ |              10  |              10  |              6   |         147601   | Female           | (2) French   |  (2) Wireless |
-61         | 2019-09-12 16~ |               9  |              12  |              1   |         151152   | Male             | (2) French   |  (2) Wireless |
-69         | 2019-09-17 17~ |               9  |              17  |              1   |           2503   | Female           | (2) French   |  (2) Wireless |       
-157        | 2019-09-12 16~ |               9  |              12  |              1   |           2529   | Male             |  (2) French  | (2) Wireless   | 
-158        | 2019-09-14 10~ |                9 |              14  |               4  |         142515   | Male             |  (2) French  | (2) Wireless   |
+ sample_id | survey_end_CES | survey_end_mont~ | survey_end_day_~ | num_attempts_CES |
+---|------|-------|------|------|---|----|
+<dbl>      | <chr>          | <dbl>            | <dbl>            |  <dbl>           |
+18         | 2019-09-23 15~ |               9  |              23  |              5   |
+32         | 2019-09-12 18~ |               9  |              12  |              1   |
+39         | 2019-09-10 18~ |               9  |              10  |              1   |
+59         | 2019-10-10 15~ |              10  |              10  |              6   |
+61         | 2019-09-12 16~ |               9  |              12  |              1   |
+69         | 2019-09-17 17~ |               9  |              17  |              1   |
+157        | 2019-09-12 16~ |               9  |              12  |              1   |
+158        | 2019-09-14 10~ |               9  |              14  |              4   |
 
 
 Using the same survey code argument with the `get_ces()` function we can retrieve the complete 2019 CES phone survey (see [*3.1.4 `get_ces()`*](#314-get_ces)). Additionally, we can see when `get_ces()` is called, the survey citation and link to repository prints to the console.
@@ -458,7 +450,10 @@ Using the same survey code argument with the `get_ces()` function we can retriev
 get_ces("ces2019_phone")
 ```
 ```
-TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; Loewen, Peter John, 2020, '2019 Canadian Election Study - Phone Survey', https://doi.org/10.7910/DVN/8RHLG1, Harvard Dataverse, V1, UNF:6:eyR28qaoYlHj9qwPWZmmVQ== [fileUNF]
+TO CITE THIS SURVEY FILE: Stephenson, Laura B; Harell, Allison; Rubenson, Daniel; 
+Loewen, Peter John, 2020, '2019 Canadian Election Study - Phone Survey', 
+https://doi.org/10.7910/DVN/8RHLG1, Harvard Dataverse, V1, 
+UNF:6:eyR28qaoYlHj9qwPWZmmVQ== [fileUNF]
 
 LINK: https://dataverse.harvard.edu/dataset.xhtml?persistentId=doi:10.7910/DVN/8RHLG1
 ```
@@ -471,20 +466,22 @@ To check that the dataset has loaded into RStudio correctly, it is best to check
 ces2019_phone <- to_factor(ces2019_phone)
 head(ces2019_phone)
 
-# alternatively the factored table can be assigned to its own data object to leave the original untouched.
+# alternatively the factored table can be assigned to its own data object 
+# to leave the original untouched.
 # ces2019_phone_factor <- labelled::to_factor(ces2019_phone)
 # head(ces2019_phone_factor)
-```
- sample_id | survey_end_CES | survey_end_mont~ | survey_end_day_~ | num_attempts_CES | interviewer_id_~ | interviewer_gen~ | language_CES | phonetype_CES |
------------|----------------|------------------|------------------|------------------|------------------|------------------|--------------|---------------|
-<dbl>      | <chr>          | <dbl>            | <dbl>            |  <dbl>           |  <dbl>           |     <chr>        |    <fct>     | <fct>         |
-18         | 2019-09-23 15~ |               9  |              23  |              5   |         161182   | Female           | (2) French   |  (2) Wireless |
-32         | 2019-09-12 18~ |               9  |              12  |              1   |         151152   | Male             | (1) English  |  (2) Wireless |
-39         | 2019-09-10 18~ |               9  |              10  |              1   |         161182   | Female           | (2) French   |  (2) Wireless |
-59         | 2019-10-10 15~ |              10  |              10  |              6   |         147601   | Female           | (2) French   |  (2) Wireless |
-61         | 2019-09-12 16~ |               9  |              12  |              1   |         151152   | Male             | (2) French   |  (2) Wireless |
-69         | 2019-09-17 17~ |               9  |              17  |              1   |           2503   | Female           | (2) French   |  (2) Wireless |
 
+>head(ces2019_phone)
+# A tibble: 6 x 278
+  sample_id survey_end_CES survey_end_mont~ survey_end_day_~ num_attempts_CES 
+      <dbl> <chr>                     <dbl>            <dbl>            <dbl> 
+1        18 2019-09-23 15~                9               23                5 
+2        32 2019-09-12 18~                9               12                1 
+3        39 2019-09-10 18~                9               10                1 
+4        59 2019-10-10 15~               10               10                6 
+5        61 2019-09-12 16~                9               12                1 
+6        69 2019-09-17 17~                9               17                1 
+```
 
 With the dataset loaded, the `select()` function from the `dplyr` package [@citedplyr] is an efficient way of selecting the required variable columns. In this case, the language, phone type, weight, citizenship, year of birth, interviewer gender, identified gender, province, satisfaction with Canadian democracy, and most important election issue are selected using the column index (see [*3.1.4 Select columns*](#314-select-columns)). Additionally, the columns are not all named in an understandable way and so will be renamed using the `rename()` function from the `dplyr` package [@citedplyr].  
 
@@ -494,17 +491,18 @@ ces2019_phone_subset <- ces2019_phone %>%
   select(7, 8, 9, 20, 25:30)
   
 head(ces2019_phone_subset)
-```
-interviewer_gender~ |  language_CES | phonetype_CES | weight_CES | q1      | q2      | q3       | q4        | q6            | q7     |
---------------------|---------------|---------------|------------|---------|---------|----------|-----------|---------------|--------|
- <chr>              |     <dbl+lbl> |   <dbl+lbl>   |   <dbl>    |<dbl+lbl>| <dbl+l> | <dbl+lb> | <dbl+lbl> |  <dbl+lbl>    | <chr>  |
-Female              |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1963 |1 [(1) ~  |5 [(5) Q~  |3 [(3) Not ve~ |economie|
-Male                |1 [(1) Englis~ |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1973 |1 [(1) ~  |5 [(5) Q~  |2 [(2) Fairly~ |Finances|
-Female              |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1994 |1 [(1) ~  |5 [(5) Q~  |1 [(1) Very s~ |agriculture|
-Female              |2 [(2) French] |2 [(2) Wireles~|      1.23  |1 [(1) Y~|    2000 |1 [(1) ~  |5 [(5) Q~  |2 [(2) Fairly~ |l'environnement|
-Male                |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1984 |1 [(1) ~  |5 [(5) Q~  |4 [(4) Not sa~ |Utilisation de la Banque du ~|
-Female              |2 [(2) French] |2 [(2) Wireles~|      0.902 |1 [(1) Y~|    1939 |1 [(1) ~  |5 [(5) Q~  |3 [(3) Not ve~ |Notre identité Québécoise|
 
+>head(ces2019_phone_subset)
+# A tibble: 6 x 10
+  interviewer_gender~ language_CES phonetype_CES weight_CES q1     q2    q3      q4                                    
+  <chr>               <fct>        <fct>              <dbl> <fct>  <fct> <fct>   <fct>    
+1 Female              (2) French   (2) Wireless       0.902 (1) Y~ 1963  (1) Ma~ (5) Que~
+2 Male                (1) English  (2) Wireless       0.902 (1) Y~ 1973  (1) Ma~ (5) Que~
+3 Female              (2) French   (2) Wireless       0.902 (1) Y~ 1994  (1) Ma~ (5) Que~
+4 Female              (2) French   (2) Wireless       1.23  (1) Y~ 2000  (1) Ma~ (5) Que~
+5 Male                (2) French   (2) Wireless       0.902 (1) Y~ 1984  (1) Ma~ (5) Que~
+6 Female              (2) French   (2) Wireless       0.902 (1) Y~ 1939  (1) Ma~ (5) Que~
+```
 
 We can see that some of the column names of the subset are not clearly named. The remedy this we can use the `rename` function from the `dplyr` package [@citedplyr]. When using `rename()`, the order goes from new name to old name (see [*3.1.6 Rename columns*](#316-rename-columns)). To gain an idea of what to rename a column we can use the `get_question()` function to find the associated survey question (see [*3.1.5 `get_question()`*](#315-get_question)).
 
